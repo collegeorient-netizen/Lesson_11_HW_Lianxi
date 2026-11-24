@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Урок 11 · Тренажёр и ДЗ · Вчера, сегодня, завтра · 俄語作業</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#3E2A47; --plum-soft:#7A6484;
+  --bg:#FFFBF7; --card:#FFFFFF;
+  --coral:#FF8A7A;  --coral-d:#E0604F; --coral-l:#FFE3DE;
+  --mint:#7FD6B8;   --mint-d:#3FA985;  --mint-l:#DDF5EC;
+  --butter:#FFD86B; --butter-d:#D9A826; --butter-l:#FFF4CF;
+  --lilac:#B9A2E8;  --lilac-d:#8468C9; --lilac-l:#EEE7FB;
+  --line:#EFE4EA;
+  --radius:16px;
+  --shadow:0 2px 10px rgba(62,42,71,.08);
+  --print:'PT Sans','Noto Sans TC',sans-serif;
+  font-size:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'PT Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+  background:var(--bg);color:var(--plum);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+}
+.app{width:100%;max-width:560px;padding:14px 16px 40px}
+button{font-family:inherit}
+.acc{color:var(--coral-d)}
+
+/* ---------- шапка ---------- */
+.top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.top .titlebox{flex:1;min-width:0}
+.top h1{font-size:1.2rem;line-height:1.2}
+.top .sub{font-size:.8rem;color:var(--plum-soft)}
+.stars{font-size:.9rem;color:var(--butter-d);font-weight:700;white-space:nowrap}
+
+/* ---------- старт ---------- */
+.hero{
+  background:var(--butter-l);border:1px solid #F5E6B0;border-radius:20px;
+  padding:20px 18px 22px;margin-bottom:12px;position:relative;overflow:hidden;
+}
+.hero .bgic{position:absolute;right:-10px;bottom:-26px;font-size:130px;color:rgba(255,138,122,.22);line-height:1}
+.hero .phrase{font-size:1.5rem;font-weight:700;line-height:1.35;position:relative;z-index:1}
+.hero .sub2{font-size:.85rem;color:var(--plum-soft);line-height:1.55;margin-top:6px;position:relative;z-index:1}
+
+.sound{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:12px 14px;margin-bottom:16px;box-shadow:var(--shadow);font-size:.85rem;
+}
+.sound .hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:700}
+.sound .hdr .zh,.sound .hdr .ja,.sound .hdr .vi{font-weight:400;color:var(--plum-soft);font-size:.78rem}
+.sound .body{display:none;margin-top:12px}
+.sound.open .body{display:block}
+.sound label{display:block;font-size:.75rem;color:var(--plum-soft);margin:0 0 5px}
+.sound select{
+  width:100%;padding:9px 10px;border:1.5px solid var(--line);border-radius:10px;
+  font-size:.9rem;color:var(--plum);background:#FFFDFB;margin-bottom:12px;font-family:inherit;
+}
+.speeds{display:flex;gap:6px;margin-bottom:12px}
+.speeds button{
+  flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:10px;
+  padding:9px 4px;font-size:.85rem;color:var(--plum);cursor:pointer;
+}
+.speeds button.on{background:var(--lilac-d);color:#fff;border-color:var(--lilac-d)}
+.warn{
+  background:var(--coral-l);border-left:4px solid var(--coral-d);border-radius:10px;
+  padding:10px 12px;font-size:.8rem;line-height:1.5;margin-top:10px;display:none;
+}
+.warn.show{display:block}
+
+/* ---------- общие ---------- */
+.screen{display:none}
+.screen.active{display:block;animation:fade .18s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.screen.active{animation:none}}
+.instr{
+  background:var(--lilac-l);border-left:4px solid var(--lilac);border-radius:10px;
+  padding:10px 12px;font-size:.88rem;margin-bottom:14px;line-height:1.5;
+}
+.instr .en{display:block;color:var(--plum-soft)}
+.instr .zh,.instr .ja,.instr .vi{display:block;color:var(--plum)}
+.btn{
+  border:none;border-radius:14px;padding:13px 20px;
+  font-weight:700;font-size:1rem;cursor:pointer;color:#fff;background:var(--lilac-d);
+}
+.btn:active{filter:brightness(.92)}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--butter-d);outline-offset:2px}
+.btn.red{background:var(--coral-d)}
+.btn.ghost{background:var(--card);color:var(--plum);border:1.5px solid var(--line)}
+.btn.sm{padding:9px 14px;font-size:.88rem}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.progress{height:8px;background:#F2E8EE;border-radius:99px;overflow:hidden;margin-bottom:16px}
+.progress i{display:block;height:100%;width:0;background:var(--mint-d);transition:width .25s}
+.feedback{min-height:30px;text-align:center;font-weight:700;font-size:.95rem;margin:12px 0 6px;color:var(--lilac-d)}
+.bigplay{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:4px auto 16px;border:none;background:var(--plum);color:#fff;
+  font-weight:700;font-size:1.05rem;padding:14px 24px;border-radius:18px;
+  cursor:pointer;box-shadow:var(--shadow);
+}
+.bigplay:active{transform:scale(.97)}
+#qnext{display:none}
+
+/* ---------- показ задания ---------- */
+.qshow{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+  text-align:center;padding:14px 10px;margin-bottom:14px;min-height:120px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+}
+.qshow .gw{font-size:2.3rem;font-weight:700;letter-spacing:.02em;line-height:1.2}
+.qshow .gloss{font-size:.82rem;color:var(--plum-soft)}
+.qshow .pic{font-size:5rem;line-height:1.15;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;gap:.15em}
+.qshow .txcard{font-size:1.9rem;font-weight:700;line-height:1.3;padding:0 6px}
+.qshow .sent{font-size:1.45rem;font-weight:700;line-height:1.45;padding:0 6px}
+.qshow .sent .gap{display:inline-block;min-width:2.6em;border-bottom:3px solid var(--coral);color:var(--coral-d)}
+.qshow .who{font-size:.95rem;color:var(--plum-soft);font-weight:700}
+.qshow .digit{font-size:4.6rem;font-weight:700;color:var(--lilac-d);line-height:1}
+.ic{display:inline-block;vertical-align:middle}
+.icbox{display:inline-flex;align-items:center;justify-content:center;width:1.5em;height:1.5em;border-radius:50%;background:var(--mint-l);color:var(--mint-d)}
+.icbox.f{background:var(--coral-l);color:var(--coral-d)}
+.icbox.n{background:var(--lilac-l);color:var(--lilac-d)}
+.icbox.pl{background:var(--butter-l);color:var(--butter-d)}
+.icbox .ic{width:.9em;height:.9em}
+.mark{display:inline-flex;align-items:center;justify-content:center;width:.75em;height:.75em;border-radius:50%;color:#fff;font-size:.55em;font-weight:700;margin-left:-.25em;align-self:flex-start}
+.mark.y{background:var(--mint-d)} .mark.n{background:var(--coral-d)}
+
+/* ---------- варианты ---------- */
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.opts.wide{grid-template-columns:1fr}
+.opt{
+  background:var(--card);border:2px solid var(--line);border-radius:var(--radius);
+  font-size:1.4rem;font-weight:700;padding:16px 6px;text-align:center;
+  cursor:pointer;transition:transform .08s;color:var(--plum);line-height:1.25;
+}
+.opt.pic{font-size:3.4rem;padding:10px 6px}
+.opt.sentence{font-size:1.1rem;padding:13px 12px;text-align:left}
+.opt.tx{font-size:1.05rem;padding:13px 10px;text-align:left}
+.opt.tx .zh,.opt.tx .ja,.opt.tx .vi{display:inline}
+.opt .sm{display:block;font-size:.8rem;color:var(--plum-soft);font-weight:400}
+.opt:active{transform:scale(.96)}
+.opt.sel{border-color:var(--lilac-d);background:var(--lilac-l)}
+.opt{position:relative}
+.opt .say{position:absolute;top:4px;right:4px;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);
+  background:#fff;font-size:.85rem;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.opt .say:active{transform:scale(.92)}
+.opt.sentence,.opt.tx{padding-right:40px}
+.opt .gt{display:block;font-size:.72rem;font-weight:400;color:var(--plum-soft);margin-top:2px}
+.opt .gt .zh,.opt .gt .ja,.opt .gt .vi{display:inline}
+.opt.dim{opacity:.4;pointer-events:none}
+
+/* ---------- анкета ---------- */
+.form label{display:block;font-size:.78rem;color:var(--plum-soft);margin:12px 0 5px}
+.form label:first-child{margin-top:0}
+.form input{
+  width:100%;font-family:inherit;font-size:1.05rem;
+  border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;color:var(--plum);background:#FFFDFB;
+}
+.form input:focus{outline:none;border-color:var(--lilac-d)}
+.hintline{font-size:.75rem;color:var(--plum-soft);margin-top:6px;line-height:1.5}
+.hintline .zh,.hintline .ja,.hintline .vi{display:block}
+.sechead{font-size:.98rem;font-weight:700;color:var(--coral-d);margin:-6px 0 10px;line-height:1.35}
+.sechead small{display:block;font-size:.75rem;color:var(--plum-soft);font-weight:400}
+
+/* ---------- итог ---------- */
+.result{text-align:center;background:var(--card);border-radius:20px;padding:26px 18px;box-shadow:var(--shadow)}
+.result h2{font-size:1.35rem}
+.result .score{font-size:2.2rem;font-weight:700;color:var(--mint-d)}
+.result p{color:var(--plum-soft);font-size:.9rem;margin:8px 0 18px;line-height:1.5}
+.result table{width:100%;border-collapse:collapse;font-size:.85rem;text-align:left;margin-top:6px}
+.result td{padding:6px 4px;border-bottom:1px solid var(--line)}
+.result td:nth-child(2),.result td:nth-child(3){text-align:right;white-space:nowrap}
+.result tr.tot td{font-weight:700;border-bottom:none}
+.status{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:12px 14px;margin:14px 0;font-size:.88rem;line-height:1.55;text-align:center;
+}
+.status .en{display:block;color:var(--plum-soft)}
+.status .zh,.status .ja,.status .vi{display:block}
+.revnote{background:var(--butter-l);border-left:4px solid var(--butter-d);border-radius:10px;padding:10px 12px;font-size:.82rem;line-height:1.55;margin:8px 0}
+.revnote .en,.revnote .zh,.revnote .ja,.revnote .vi{display:block;color:var(--plum-soft)}
+#dlist ol{padding-left:24px;margin-top:8px;font-size:.86rem;line-height:1.55}
+#dlist li{padding:6px 0;border-bottom:1px dashed var(--line)}
+#dlist li .q{font-weight:700}
+#dlist li .q .ic{width:1.3em;height:1.3em}
+#dlist li.y .res{color:var(--mint-d)}
+#dlist li.n .res{color:var(--coral-d)}
+#dlist li.h{color:var(--plum-soft)}
+#dlist li.h .zh,#dlist li.h .ja,#dlist li.h .vi{display:inline}
+
+/* ---------- языки ---------- */
+.ja{font-family:'Noto Sans JP','Hiragino Sans','Yu Gothic','Meiryo',sans-serif}
+.vi{font-family:system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+body.lg-zh .ja, body.lg-zh .vi, body.lg-ja .zh, body.lg-ja .vi, body.lg-vi .zh, body.lg-vi .ja{display:none !important}
+.lgsw{display:flex;gap:6px;justify-content:flex-end;margin-bottom:8px}
+.lgsw button{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;
+  font-size:.82rem;color:var(--plum);cursor:pointer;font-family:'PT Sans','Noto Sans TC','Noto Sans JP',sans-serif}
+.lgsw button.on{background:var(--lilac);color:#fff;border-color:var(--lilac);font-weight:700}
+.copy{text-align:center;font-size:.75rem;color:var(--plum-soft);margin-top:30px;padding-top:12px;border-top:1px solid var(--line);line-height:1.6}
+
+/* ---------- сроки ---------- */
+.dlbox{background:var(--butter-l);border-left:4px solid var(--butter-d);border-radius:10px;padding:10px 12px;font-size:.85rem;line-height:1.55;margin-bottom:14px}
+.dlbox.late{background:var(--coral-l);border-left-color:var(--coral-d)}
+.dlbox .en,.dlbox .zh,.dlbox .ja,.dlbox .vi{display:block;color:var(--plum-soft);margin-top:4px}
+.dlbox ul,.modal ul{margin:6px 0 0;padding-left:22px}
+.modal{position:fixed;inset:0;background:rgba(62,42,71,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+.modal.show{display:flex}
+.modal .card{background:var(--card);border-radius:18px;max-width:520px;width:100%;max-height:90vh;overflow:auto;padding:18px 16px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.modal h3{font-size:1.15rem;margin-bottom:10px;color:var(--coral-d)}
+.modal .rules{font-size:.86rem;line-height:1.6}
+.modal .rules .blk{margin-bottom:10px}
+.modal .rules .blk.en{color:var(--plum-soft)}
+.latefix{font-size:.9rem;color:var(--coral-d);font-weight:700;margin-top:-6px;margin-bottom:10px}
+svg.pelm{width:1em;height:1em;vertical-align:-.12em}
+@media (max-width:380px){
+  .opt{font-size:1.2rem;padding:13px 4px}
+  .opt.pic{font-size:2.8rem}
+  .qshow .pic{font-size:4.2rem}
+}
+/* ---------- урок 11: меню, тренажёр, буквы ---------- */
+.modes{display:grid;gap:12px;margin-bottom:14px}
+.mode{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px 16px 14px;cursor:pointer;box-shadow:var(--shadow);text-align:left}
+.mode:active{transform:scale(.98)}
+.mode h2{font-size:1.2rem;margin-bottom:4px}
+.mode p{font-size:.84rem;color:var(--plum-soft);line-height:1.5}
+.mode p .zh,.mode p .ja,.mode p .vi{display:block;color:var(--plum)}
+.mode.tr{border-color:var(--mint)} .mode.tr h2{color:var(--mint-d)}
+.mode.hw{border-color:var(--coral)} .mode.hw h2{color:var(--coral-d)}
+.backlink{display:inline-block;margin-bottom:10px;font-size:.85rem;color:var(--lilac-d);cursor:pointer;background:none;border:none;padding:0}
+.opt.good{border-color:var(--mint-d);background:var(--mint-l);opacity:1}
+.opt.bad{border-color:var(--coral-d);background:var(--coral-l);opacity:1}
+.qshow .deg{font-size:.55em;font-weight:700;color:var(--coral-d);margin-left:.15em}
+.tilesbox{margin-top:4px}
+.slot{min-height:64px;border:2px dashed var(--lilac);border-radius:16px;background:var(--card);display:flex;align-items:center;justify-content:center;
+  gap:4px;font-size:2rem;font-weight:700;letter-spacing:.04em;padding:8px;margin-bottom:12px;flex-wrap:wrap}
+.slot em{color:var(--plum-soft);font-style:normal}
+.slot.sel{border-color:var(--lilac-d);background:var(--lilac-l)}
+.slot.good{border-color:var(--mint-d);background:var(--mint-l);border-style:solid}
+.slot.bad{border-color:var(--coral-d);background:var(--coral-l);border-style:solid}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tile{width:52px;height:56px;border-radius:14px;border:2px solid var(--line);background:var(--butter-l);font-size:1.6rem;font-weight:700;color:var(--plum);cursor:pointer;font-family:inherit}
+.tile:active{transform:scale(.94)}
+.tile:disabled{opacity:.25;cursor:default}
+.ttsnote{background:var(--mint-l);border-left:4px solid var(--mint-d);border-radius:10px;padding:8px 12px;font-size:.78rem;line-height:1.5;margin-bottom:12px;color:var(--plum-soft)}
+.vtbox{margin-top:4px}
+.vthead{font-weight:700;color:var(--lilac-d);margin:0 0 6px;font-size:.95rem}
+table.vt{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);font-size:1rem}
+table.vt th,table.vt td{border-bottom:1px solid var(--line);padding:6px 6px;text-align:center;vertical-align:middle}
+table.vt thead th{background:var(--lilac-l);font-size:.95rem}
+table.vt th small,table.vt td small{display:block;font-weight:400;font-size:.68rem;color:var(--plum-soft)}
+table.vt td small{display:inline}
+table.vt tbody th{text-align:left;font-size:1.05rem;white-space:nowrap}
+table.vt td.pres{color:var(--plum-soft)}
+table.vt td.past{background:#FFFBF0}
+.opt.vchip{display:inline-block;padding:6px 10px;margin:2px;font-size:1.05rem;font-weight:700;min-width:0;cursor:pointer}
+.vtnote .en,.vtnote .zh,.vtnote .ja,.vtnote .vi{display:block}
+.vtnote{font-size:.78rem;color:var(--plum-soft);margin-top:6px;line-height:1.45}
+.txtbox{width:100%;background:var(--butter-l,#FFF4CF);border:1px solid #F5E6B0;border-radius:14px;padding:10px 14px;margin:0 0 12px;text-align:left;font-size:1.05rem;line-height:1.6}
+.txtbox details{margin-top:6px;font-size:.82rem;color:var(--plum-soft,#7A6484)}
+.txtbox summary{cursor:pointer}
+.txttr{margin-top:4px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="lgsw" id="lgsw">
+    <button data-lg="zh" onclick="setLang('zh')">中文</button>
+    <button data-lg="ja" onclick="setLang('ja')">日本語</button>
+    <button data-lg="vi" onclick="setLang('vi')">Tiếng Việt</button>
+  </div>
+
+  <div class="top">
+    <div class="titlebox">
+      <h1>Урок 11 · Вчера, сегодня, завтра</h1>
+      <div class="sub"><span class="zh">第11課：昨天、今天、明天</span><span class="ja">第11課：昨日・今日・明日</span><span class="vi">Bài 11: Hôm qua, hôm nay, ngày mai</span> · Lesson 11</div>
+    </div>
+    <div class="stars" id="topProg"></div>
+  </div>
+
+  <!-- ================= МЕНЮ ================= -->
+  <section class="screen active" id="scr-mode">
+    <div class="hero">
+      <span class="bgic">☂</span>
+      <div class="phrase">Вчера было холодно.<br>Сегодня тепло.<br>А завтра?</div>
+      <div class="sub2">Вчера, сегодня, завтра · был, была, было, были · погода · борщ · три текста<br>
+        Yesterday, today, tomorrow · past of “to be” · weather · borscht · three texts<br>
+        <span class="zh">昨天、今天、明天 · 過去式 был · 天氣 · 紅菜湯 · 三篇課文</span><span class="ja">昨日・今日・明日 · 過去形 был · 天気 · ボルシチ · 本文3つ</span><span class="vi">Hôm qua, hôm nay, ngày mai · quá khứ был · thời tiết · borscht · ba bài đọc</span></div>
+    </div>
+    <div class="modes">
+      <div class="mode tr" tabindex="0" onclick="startTrainer()" onkeydown="if(event.key==='Enter')startTrainer()">
+        <h2>🏋️ Тренажёр · Trainer</h2>
+        <p>21 задание, без анкеты. После каждого ответа сразу видно, верно или нет. Задания каждый раз новые — тренируйся сколько хочешь, на уроке и дома.
+          <span class="en">21 tasks, no form. After each answer you see at once whether it is right. New tasks every time — practise as much as you like.</span>
+          <span class="zh">21 題，不用填資料。每答一題馬上知道對不對。題目每次都不一樣——上課、在家都可以隨時練習。</span><span class="ja">21問、名前の入力なし。答えるたびに正解かどうかがすぐわかります。毎回問題が変わるので、何回でも練習できます。</span><span class="vi">21 câu, không cần điền thông tin. Trả lời xong là biết ngay đúng hay sai. Mỗi lần câu hỏi đều mới — luyện bao nhiêu tùy thích.</span></p>
+      </div>
+      <div class="mode hw" tabindex="0" onclick="openHW()" onkeydown="if(event.key==='Enter')openHW()">
+        <h2>📝 Домашнее задание · Homework</h2>
+        <p>40 заданий · 100 баллов. Ответы проверяются в конце, результат отправляется преподавателю.
+          <span class="en">40 tasks · 100 points. Answers are checked at the end; the result is sent to the teacher.</span>
+          <span class="zh">40 題 · 100 分。最後才批改，成績會寄給老師。</span><span class="ja">40問 · 100点。採点は最後で、結果は先生に送られます。</span><span class="vi">40 câu · 100 điểm. Chấm điểm ở cuối, kết quả gửi cho thầy.</span></p>
+      </div>
+    </div>
+
+    <div class="sound open" id="soundPanel">
+      <div class="hdr" onclick="document.getElementById('soundPanel').classList.toggle('open')">
+        <span>🔈 Звук · Sound</span>
+        <span class="zh">語音設定 ▾</span><span class="ja">音声の設定 ▾</span><span class="vi">Cài đặt âm thanh ▾</span>
+      </div>
+      <div class="body">
+        <div class="ttsnote">🎙 Пока звучит синтезированный женский голос устройства (лучше всего — «Google русский» в Chrome). Записи преподавателя появятся позже.<br>
+          For now a synthesized female voice of your device is used. The teacher’s recordings will be added later.
+          <span class="zh">目前使用裝置的合成女聲（Chrome 的「Google русский」最好）。老師的錄音之後會加上。</span><span class="ja">今は端末の合成音声（女性）を使っています（Chrome の「Google русский」がおすすめ）。先生の録音は後で追加されます。</span><span class="vi">Hiện dùng giọng nữ tổng hợp của thiết bị (tốt nhất là «Google русский» trên Chrome). Bản thu của thầy sẽ được thêm sau.</span></div>
+        <label>Голос · Voice · <span class="zh">語音</span><span class="ja">音声</span><span class="vi">Giọng đọc</span></label>
+        <select id="voiceSel" onchange="setVoice(this.value)"></select>
+        <label>Скорость речи · Speed · <span class="zh">語速</span><span class="ja">話す速さ</span><span class="vi">Tốc độ đọc</span></label>
+        <div class="speeds" id="speeds">
+          <button onclick="setRate(0.75,this)">Медленно<br><span class="zh">慢</span><span class="ja">ゆっくり</span><span class="vi">Chậm</span></button>
+          <button class="on" onclick="setRate(0.9,this)">Обычно<br><span class="zh">正常</span><span class="ja">ふつう</span><span class="vi">Bình thường</span></button>
+          <button onclick="setRate(1.05,this)">Быстро<br><span class="zh">快</span><span class="ja">速い</span><span class="vi">Nhanh</span></button>
+        </div>
+        <div class="row"><button class="btn ghost sm" onclick="speak('Сегодня жарко, а вчера был дождь.')">🔊 Проверить · Test · <span class="zh">試聽</span><span class="ja">試しに聞く</span><span class="vi">Nghe thử</span></button></div>
+        <div class="warn" id="voiceWarn">
+          На этом устройстве нет русского голоса. · No Russian voice on this device.<br>
+          <span class="zh">此裝置沒有俄語語音。iPhone/iPad：設定 → 輔助使用 → 朗讀內容 → 聲音 → 俄文（選女聲 Milena）。Android：設定 → 文字轉語音 → 安裝俄文。</span><span class="ja">この端末にはロシア語の音声がありません。iPhone/iPad：設定 → アクセシビリティ → 読み上げコンテンツ → 声 → ロシア語（女性の Milena）。Android：設定 → テキスト読み上げ → ロシア語をインストール。</span><span class="vi">Thiết bị chưa có giọng tiếng Nga. iPhone/iPad: Cài đặt → Trợ năng → Nội dung được đọc → Giọng nói → Tiếng Nga (giọng nữ Milena). Android: Cài đặt → Chuyển văn bản thành giọng nói → cài tiếng Nga.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ДЗ: АНКЕТА ================= -->
+  <section class="screen" id="scr-intro">
+    <button class="backlink" onclick="goMenu()">← Меню · Menu · <span class="zh">回選單</span><span class="ja">メニューへ</span><span class="vi">Về menu</span></button>
+    <div class="dlbox" id="dlBanner" style="display:none"></div>
+    <div class="instr">
+      40 заданий · 100 баллов · ≈ 20–30 минут. Нажимай 🔊 и <b>слушай</b>. Ответы проверяются <b>в конце</b>: в каждом задании засчитывается <b>первый</b> ответ. Прогресс сохраняется на этом устройстве.
+      <span class="en">40 tasks · 100 points · about 20–30 minutes. Press 🔊 and <b>listen</b>. Answers are checked <b>at the end</b>; only your <b>first</b> answer counts. Progress is saved on this device.</span>
+      <span class="zh">40 題 · 100 分 · 約 20–30 分鐘。按 🔊 <b>聽一聽</b>。答案<b>最後</b>才一起批改；每題只算<b>第一次</b>的答案。進度會儲存在這台裝置上。</span><span class="ja">40問 · 100点 · 約20〜30分。🔊 を押して<b>聞いてください</b>。採点は<b>最後</b>にまとめて行い、各問題は<b>最初</b>の答えだけが採点されます。進み具合はこの端末に保存されます。</span><span class="vi">40 câu · 100 điểm · khoảng 20–30 phút. Bấm 🔊 để <b>nghe</b>. Đáp án được chấm <b>ở cuối</b>; mỗi câu chỉ tính câu trả lời <b>đầu tiên</b>. Tiến độ được lưu trên thiết bị này.</span>
+    </div>
+    <div class="form">
+      <label>Имя · Name · <span class="zh">中文姓名</span><span class="ja">氏名（漢字・名簿と同じ）</span><span class="vi">Họ tên (chữ Hán, như danh sách lớp)</span></label>
+      <input id="fZh" autocomplete="off" placeholder="例：王小明">
+      <label>Русское имя (обязательно!) · Russian name (required!) · <span class="zh">俄文名字（一定要填！）</span><span class="ja">ロシア語の名前（必須！）</span><span class="vi">Tên tiếng Nga (bắt buộc!)</span></label>
+      <input id="fRu" list="ruNames" autocomplete="off" placeholder="напр. К<span class="acc">а</span>тя">
+      <datalist id="ruNames"></datalist>
+      <label>學號 · Номер студента · Student ID · <span class="zh">學號</span><span class="ja">学籍番号</span><span class="vi">Mã số sinh viên</span></label>
+      <input id="fId" inputmode="numeric" autocomplete="off" placeholder="例：11557245">
+      <label>E-mail</label>
+      <input id="fMail" type="email" inputmode="email" autocomplete="email" placeholder="11557245@cycu.org.tw">
+      <div class="hintline">E-mail заполнится сам после 學號. Когда закончишь, увидишь свои баллы и сам(а) решишь: <b>отправить</b> результат преподавателю или <b>пройти задание заново</b>. Отправить можно <b>только один раз</b>.<br>
+        When you finish, you will see your score and choose: <b>send</b> it to the teacher or <b>start again</b>. You can send <b>only once</b>.
+        <span class="zh">填好學號後 e-mail 會自動帶入。做完後會先看到分數，再由你決定：<b>寄給老師</b>，或<b>重新作答</b>。成績<b>只能寄出一次</b>。</span><span class="ja">學號を入れるとメールアドレスが自動で入ります。最後まで解くと点数が表示され、<b>先生に送る</b>か<b>やり直す</b>かを選べます。送信できるのは<b>1回だけ</b>です。</span><span class="vi">Nhập 學號 thì e-mail sẽ tự điền. Làm xong, em sẽ thấy điểm và tự chọn: <b>gửi cho thầy</b> hoặc <b>làm lại từ đầu</b>. Chỉ được gửi <b>một lần</b>.</span></div>
+      <div class="dlbox" style="margin-top:12px">🔁 <b>Тренировка в формате ДЗ:</b> напиши своё <b>русское имя</b>, а в поле 學號 введи <b>000</b> — результат <b>никуда не отправляется</b>.
+        <span class="en">Practice in homework format: write your Russian name and enter 000 as the student ID — the result is not sent.</span>
+        <span class="zh">想用作業格式練習：填俄文名字，學號輸入 <b>000</b>——成績<b>不會寄出</b>。</span><span class="ja">宿題の形で練習：ロシア語の名前を書き、學號に <b>000</b> と入力——結果は<b>送信されません</b>。</span><span class="vi">Luyện tập theo dạng bài tập: viết tên tiếng Nga, nhập <b>000</b> vào ô 學號 — kết quả <b>không được gửi</b>.</span></div>
+      <div class="feedback" id="formErr" style="font-size:.9rem;color:var(--coral-d)"></div>
+      <div class="row">
+        <button class="btn red" id="startBtn" onclick="startHW()">Начать · Start · <span class="zh">開始</span><span class="ja">スタート</span><span class="vi">Bắt đầu</span></button>
+      </div>
+      <div class="row" id="resumeRow" style="display:none;margin-top:10px">
+        <button class="btn" onclick="resumeHW()">▶ Продолжить · Continue · <span class="zh">繼續作答</span><span class="ja">続ける</span><span class="vi">Tiếp tục</span> <span id="resumeInfo"></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ЗАДАНИЕ ================= -->
+  <section class="screen" id="scr-task">
+    <button class="backlink" onclick="if(confirm('Выйти в меню? · Back to menu?')) goMenu()">← Меню · Menu · <span class="zh">回選單</span><span class="ja">メニューへ</span><span class="vi">Về menu</span></button>
+    <div class="progress"><i id="qbar"></i></div>
+    <div class="sechead" id="sechead"></div>
+    <div class="instr" id="qinstr"></div>
+    <div class="qshow" id="qshow"></div>
+    <button class="bigplay" id="qplay" onclick="playCurrent()">🔊 Слушать · Listen · <span class="zh">聽一聽</span><span class="ja">聞く</span><span class="vi">Nghe</span></button>
+    <div class="opts" id="qopts"></div>
+    <div class="feedback" id="qfb"></div>
+    <div class="row"><button class="btn red" id="qnext" onclick="nextTask()">Дальше · Next · <span class="zh">下一題</span><span class="ja">次へ</span><span class="vi">Tiếp theo</span></button></div>
+  </section>
+
+  <!-- ================= ТРЕНАЖЁР: ИТОГ ================= -->
+  <section class="screen" id="scr-trdone">
+    <div class="result">
+      <h2>🏋️ Тренажёр · Trainer</h2>
+      <div class="score" id="trscore"></div>
+      <p id="trmsg"></p>
+      <div class="row">
+        <button class="btn" onclick="startTrainer()">↻ Ещё раз · Again · <span class="zh">再練習一次</span><span class="ja">もう一度</span><span class="vi">Làm lại</span></button>
+        <button class="btn ghost" onclick="goMenu()">← Меню · Menu · <span class="zh">回選單</span><span class="ja">メニューへ</span><span class="vi">Về menu</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ДЗ: ИТОГ ================= -->
+  <section class="screen" id="scr-done">
+    <div class="result">
+      <h2 id="dtitle"></h2>
+      <div class="score" id="dscore"></div>
+      <div class="latefix" id="dlate"></div>
+      <p id="dmsg"></p>
+      <div id="dbreak"></div>
+    </div>
+    <div class="status" id="sendStatus"></div>
+    <div class="row" id="decideBtns" style="display:none;margin-bottom:14px">
+      <button class="btn red" onclick="confirmSend()">✉ Отправить · Send · <span class="zh">寄給老師</span><span class="ja">先生に送る</span><span class="vi">Gửi cho thầy</span></button>
+      <button class="btn ghost" onclick="restartHW()">↺ Пройти заново · Start again · <span class="zh">重新作答</span><span class="ja">やり直す</span><span class="vi">Làm lại từ đầu</span></button>
+    </div>
+    <div class="row" id="againBtns" style="display:none;margin-bottom:14px">
+      <button class="btn ghost" onclick="restartHW()">↻ Тренироваться ещё · Practice again · <span class="zh">再練習一次</span><span class="ja">もう一度練習する</span><span class="vi">Luyện tập thêm</span></button>
+    </div>
+    <div class="row" id="sendBtns" style="display:none;margin-bottom:14px">
+      <button class="btn" id="resendBtn" onclick="sendResults()">↻ Отправить снова · Resend · <span class="zh">重新寄出</span><span class="ja">もう一度送る</span><span class="vi">Gửi lại</span></button>
+      <button class="btn ghost" onclick="copyReport()">📋 Копировать · Copy · <span class="zh">複製成績</span><span class="ja">コピー</span><span class="vi">Sao chép</span></button>
+      <a class="btn ghost" id="mailtoLink" href="#" style="text-decoration:none">✉ E-mail · <span class="zh">寄給老師</span><span class="ja">先生にメール</span><span class="vi">Gửi thầy qua e-mail</span></a>
+    </div>
+    <div>
+      <b>Мои ответы · My answers · <span class="zh">我的答案</span><span class="ja">自分の答え</span><span class="vi">Câu trả lời của em</span></b>
+      <div id="revNote"></div>
+      <div id="dlist"></div>
+    </div>
+  </section>
+
+  <footer class="copy">© 2026–2046 耿華 · Все права защищены · All rights reserved ·
+    <span class="zh">版權所有</span><span class="ja">無断転載禁止</span><span class="vi">Bảo lưu mọi quyền</span></footer>
+</div>
+
+<div class="modal" id="dlModal" role="dialog" aria-modal="true">
+  <div class="card">
+    <h3>⏰ Сроки сдачи · Deadlines · <span class="zh">繳交期限</span><span class="ja">提出期限</span><span class="vi">Hạn nộp bài</span></h3>
+    <div class="rules" id="dlRules"></div>
+    <div class="row" style="margin-top:6px">
+      <button class="btn red" onclick="document.getElementById('dlModal').classList.remove('show')">Понятно · OK · <span class="zh">我知道了</span><span class="ja">わかりました</span><span class="vi">Đã hiểu</span></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+/* ============================================================
+   УРОК 11 · ТРЕНАЖЁР + ДОМАШНЕЕ ЗАДАНИЕ · «Вчера, сегодня, завтра»
+   Тренажёр: 21 задание, ответ сразу. ДЗ: 40 заданий, 100 баллов,
+   проверка в конце, до отправки — половина разбора.
+   ============================================================ */
+const plain = s => (s||'').replace(/́/g,'');
+const acc = s => (s||'').replace(/([аеёиоуыэюяАЕЁИОУЫЭЮЯ])́/g,'<span class="acc">$1</span>');
+const L = (zh,ja,vi) => `<span class="zh">${zh}</span><span class="ja">${ja}</span><span class="vi">${vi}</span>`;
+const T = (ru,en,zh,ja,vi) => `${ru}<span class="en">${en}</span>${L(zh,ja,vi)}`;
+let LANG = 'zh';
+const P = (zh,ja,vi) => ({zh,ja,vi})[LANG];
+function setLang(lg){
+  LANG = ['zh','ja','vi'].includes(lg) ? lg : 'zh';
+  document.body.classList.remove('lg-zh','lg-ja','lg-vi');
+  document.body.classList.add('lg-'+LANG);
+  document.documentElement.lang = LANG==='zh' ? 'zh-Hant' : LANG;
+  document.querySelectorAll('#lgsw button').forEach(b=>b.classList.toggle('on', b.dataset.lg===LANG));
+  try{ localStorage.setItem('hw_lang', LANG); }catch(e){}
+  try{ renderVoiceUI(); }catch(e){}
+}
+function initLang(){
+  let lg=null; try{ lg=localStorage.getItem('hw_lang'); }catch(e){}
+  if(!lg){ const n=(navigator.language||'').toLowerCase(); lg = n.startsWith('ja')?'ja' : n.startsWith('vi')?'vi' : 'zh'; }
+  setLang(lg);
+}
+
+
+/* ============================================================
+   ДАННЫЕ · урок 11: вчера, сегодня, завтра · был/была/было/были ·
+   погода · борщ · три текста
+   ============================================================ */
+const WORDS = [
+ {w:'вчера́',    zh:'昨天',     ja:'昨日',        vi:'hôm qua',     en:'yesterday'},
+ {w:'сего́дня',  zh:'今天',     ja:'今日',        vi:'hôm nay',     en:'today'},
+ {w:'за́втра',   zh:'明天',     ja:'明日',        vi:'ngày mai',    en:'tomorrow'},
+ {w:'жа́рко',    zh:'熱',       ja:'暑い',        vi:'nóng',        en:'hot'},
+ {w:'тепло́',    zh:'溫暖',     ja:'暖かい',      vi:'ấm',          en:'warm'},
+ {w:'хо́лодно',  zh:'冷',       ja:'寒い',        vi:'lạnh',        en:'cold'},
+ {w:'дождь',     zh:'雨、下雨', ja:'雨',          vi:'mưa',         en:'rain'},
+ {w:'пого́да',   zh:'天氣',     ja:'天気',        vi:'thời tiết',   en:'weather'},
+ {w:'борщ',      zh:'紅菜湯',   ja:'ボルシチ',    vi:'súp borscht', en:'borscht'},
+ {w:'свёкла',    zh:'甜菜根',   ja:'ビーツ',      vi:'củ dền',      en:'beetroot'},
+ {w:'капу́ста',  zh:'高麗菜',   ja:'キャベツ',    vi:'bắp cải',     en:'cabbage'},
+ {w:'карто́шка', zh:'馬鈴薯',   ja:'じゃがいも',  vi:'khoai tây',   en:'potatoes'},
+ {w:'мя́со',     zh:'肉',       ja:'肉',          vi:'thịt',        en:'meat'},
+ {w:'смета́на',  zh:'酸奶油',   ja:'サワークリーム', vi:'kem chua', en:'sour cream'}
+];
+const WBY = Object.fromEntries(WORDS.map(o=>[plain(o.w),o]));
+/* группы, чтобы варианты были «из одной темы» */
+const WGROUP = {вчера:'t',сегодня:'t',завтра:'t',жарко:'w',тепло:'w',холодно:'w',дождь:'w',погода:'w',борщ:'f',свекла:'f',капуста:'f',картошка:'f',мясо:'f',сметана:'f'};
+
+/* C · вчера / сегодня / завтра — по смыслу перевода и по «был» */
+const TIME3 = ['вчера́','сего́дня','за́втра'];
+const TIMES = [
+ {id:'c1',  s:'___ у меня́ был уро́к.',            a:'вчера́',   zh:'昨天我有課。',            ja:'昨日は授業があった。',        vi:'Hôm qua tôi có giờ học.',      en:'Yesterday I had a class.'},
+ {id:'c2',  s:'___ у нас о́тпуск!',                a:'сего́дня', zh:'今天我們放假！',          ja:'今日から休暇！',              vi:'Hôm nay chúng tôi nghỉ phép!', en:'Today we are on vacation!'},
+ {id:'c3',  s:'___ мы лети́м в Москву́.',          a:'за́втра',  zh:'明天我們飛莫斯科。',      ja:'明日モスクワへ飛ぶ。',        vi:'Ngày mai chúng tôi bay đi Moskva.', en:'Tomorrow we fly to Moscow.'},
+ {id:'c4',  s:'___ бы́ло хо́лодно.',               a:'вчера́',   zh:'昨天很冷。',              ja:'昨日は寒かった。',            vi:'Hôm qua trời lạnh.',           en:'It was cold yesterday.'},
+ {id:'c5',  s:'___ жа́рко.',                       a:'сего́дня', zh:'今天很熱。',              ja:'今日は暑い。',                vi:'Hôm nay trời nóng.',           en:'It is hot today.'},
+ {id:'c6',  s:'___ дождь?',                        a:'за́втра',  zh:'明天會下雨嗎？',          ja:'明日は雨？',                  vi:'Ngày mai có mưa không?',       en:'Will it rain tomorrow?'},
+ {id:'c7',  s:'___ я е́ду на такси́ в аэропо́рт.', a:'сего́дня', zh:'今天我搭計程車去機場。',  ja:'今日はタクシーで空港へ行く。', vi:'Hôm nay tôi đi taxi ra sân bay.', en:'Today I am going to the airport by taxi.'},
+ {id:'c8',  s:'___ Ни́на была́ в То́кио.',         a:'вчера́',   zh:'昨天妮娜在東京。',        ja:'昨日ニーナは東京にいた。',    vi:'Hôm qua Nina ở Tokyo.',        en:'Yesterday Nina was in Tokyo.'},
+ {id:'c9',  s:'___ мне два́дцать лет!',            a:'за́втра',  zh:'明天我就二十歲了！',      ja:'明日で二十歳！',              vi:'Ngày mai tôi tròn 20 tuổi!',   en:'Tomorrow I will be twenty!'},
+ {id:'c10', s:'___ у нас борщ.',                   a:'сего́дня', zh:'今天我們吃紅菜湯。',      ja:'今日はボルシチ。',            vi:'Hôm nay chúng ta ăn borscht.', en:'Today we have borscht.'}
+];
+const CBY = Object.fromEntries(TIMES.map(o=>[o.id,o]));
+
+/* D · был / была / было / были */
+const BYL = ['был','была́','бы́ло','бы́ли'];
+const PAST = [
+ {id:'d1',  s:'Вчера́ ___ уро́к.',              a:'был',   zh:'昨天有課。',            ja:'昨日は授業があった。',     vi:'Hôm qua có giờ học.',        en:'Yesterday there was a class.'},
+ {id:'d2',  s:'Вчера́ ___ плоха́я пого́да.',    a:'была́', zh:'昨天天氣不好。',        ja:'昨日は天気が悪かった。',   vi:'Hôm qua thời tiết xấu.',     en:'Yesterday the weather was bad.'},
+ {id:'d3',  s:'Вчера́ ___ хорошо́.',            a:'бы́ло', zh:'昨天很好。',            ja:'昨日はよかった。',         vi:'Hôm qua thật tốt.',          en:'Yesterday it was good.'},
+ {id:'d4',  s:'Вчера́ ___ пельме́ни.',          a:'бы́ли', zh:'昨天吃了俄式餃子。',    ja:'昨日はペリメニだった。',   vi:'Hôm qua có pelmeni.',        en:'Yesterday we had pelmeni.'},
+ {id:'d5',  s:'Вчера́ ___ хо́лодно.',           a:'бы́ло', zh:'昨天很冷。',            ja:'昨日は寒かった。',         vi:'Hôm qua trời lạnh.',         en:'It was cold yesterday.'},
+ {id:'d6',  s:'У меня́ ___ зо́нтик.',           a:'был',   zh:'我帶了傘。',            ja:'傘を持っていた。',         vi:'Tôi có mang ô.',             en:'I had an umbrella.'},
+ {id:'d7',  s:'Ни́на: «Вчера́ я ___ в То́кио».', a:'была́', zh:'妮娜：「昨天我在東京。」', ja:'ニーナ：「昨日は東京にいたの。」', vi:'Nina: “Hôm qua tôi ở Tokyo.”', en:'Nina: “Yesterday I was in Tokyo.”'},
+ {id:'d8',  s:'Вчера́ ___ дождь.',              a:'был',   zh:'昨天下雨了。',          ja:'昨日は雨だった。',         vi:'Hôm qua trời mưa.',          en:'It rained yesterday.'},
+ {id:'d9',  s:'Вчера́ ___ борщ.',               a:'был',   zh:'昨天吃了紅菜湯。',      ja:'昨日はボルシチだった。',   vi:'Hôm qua có borscht.',        en:'Yesterday we had borscht.'},
+ {id:'d10', s:'Вчера́ ___ жа́рко.',             a:'бы́ло', zh:'昨天很熱。',            ja:'昨日は暑かった。',         vi:'Hôm qua trời nóng.',         en:'It was hot yesterday.'},
+ {id:'d11', s:'Са́ша: «Вчера́ я ___ в Москве́».', a:'был',  zh:'薩沙：「昨天我在莫斯科。」', ja:'サーシャ：「昨日はモスクワにいた。」', vi:'Sasha: “Hôm qua tôi ở Moskva.”', en:'Sasha: “Yesterday I was in Moscow.”'},
+ {id:'d12', s:'Вчера́ мы ___ в аэропорту́.',    a:'бы́ли', zh:'昨天我們在機場。',      ja:'昨日私たちは空港にいた。', vi:'Hôm qua chúng tôi ở sân bay.', en:'Yesterday we were at the airport.'}
+];
+const DBY = Object.fromEntries(PAST.map(o=>[o.id,o]));
+
+/* E · погода: картинка → фраза */
+const WEA = [
+ {id:'e1', day:'сего́дня', pic:'☀️', deg:'35°', a:'Сего́дня жа́рко.'},
+ {id:'e2', day:'сего́дня', pic:'🌤️', deg:'20°', a:'Сего́дня тепло́.'},
+ {id:'e3', day:'сего́дня', pic:'🥶', deg:'5°',  a:'Сего́дня хо́лодно.'},
+ {id:'e4', day:'сего́дня', pic:'🌧️', deg:'',    a:'Сего́дня дождь.'},
+ {id:'e5', day:'вчера́',   pic:'🥶', deg:'5°',  a:'Вчера́ бы́ло хо́лодно.'},
+ {id:'e6', day:'вчера́',   pic:'☀️', deg:'35°', a:'Вчера́ бы́ло жа́рко.'},
+ {id:'e7', day:'вчера́',   pic:'🌧️', deg:'',    a:'Вчера́ был дождь.'},
+ {id:'e8', day:'за́втра',  pic:'🌤️', deg:'20°', a:'За́втра тепло́.'}
+];
+const EBY = Object.fromEntries(WEA.map(o=>[o.id,o]));
+/* ошибки-ловушки для погоды (кроме фраз других карточек) */
+const WEA_TRAPS = ['Вчера́ была́ хо́лодно.','Вчера́ бы́ли дождь.','Сего́дня бы́ло жа́рко.','За́втра был дождь.'];
+
+/* F · тексты: вопрос → ответ; x — неверные (5 шт.: ДЗ берёт 3, тренажёр — 5) */
+const TXT_T = {
+ 1:['Текст 1 · У нас о́тпуск!','課文1','本文1','Bài 1','Text 1'],
+ 2:['Текст 2 · Ско́лько тебе́ лет?','課文2','本文2','Bài 2','Text 2'],
+ 3:['Текст 3 · Пого́да и зо́нтик','課文3','本文3','Bài 3','Text 3']
+};
+const TQ = [
+ {id:'f1', t:1, q:'Как её зову́т?', zh:'她叫什麼名字？', ja:'彼女の名前は？', vi:'Cô ấy tên là gì?', en:'What is her name?',
+  a:'Ле́на.', x:['Ни́на.','Са́ша.','Ли́ля.','А́ня.','Ка́тя.']},
+ {id:'f2', t:1, q:'Что бы́ло вчера́?', zh:'昨天有什麼？', ja:'昨日は何があった？', vi:'Hôm qua có gì?', en:'What was there yesterday?',
+  a:'Уро́к.', x:['О́тпуск.','Рейс.','Борщ.','Дождь.','Такси́.']},
+ {id:'f3', t:1, q:'Куда́ они́ е́дут сего́дня?', zh:'他們今天要去哪裡？', ja:'今日どこへ行く？', vi:'Hôm nay họ đi đâu?', en:'Where are they going today?',
+  a:'В аэропо́рт Таоюа́нь.', x:['В аэропо́рт Сунша́нь.','В Чжунли́, на уро́к.','В То́кио.','В Ханой.','В Сеу́л.']},
+ {id:'f4', t:1, q:'Рейс но́мер…?', zh:'班機號碼是幾號？', ja:'何便？', vi:'Chuyến bay số mấy?', en:'Flight number…?',
+  a:'692.', x:['923.','629.','296.','962.','269.']},
+ {id:'f5', t:1, q:'За́втра они́…', zh:'明天他們在……', ja:'明日、彼らは……', vi:'Ngày mai họ ở…', en:'Tomorrow they are…',
+  a:'в Москве́.', x:['в Тайбэ́е.','в То́кио.','в Чжунли́.','в Ханое.','в аэропорту́.']},
+ {id:'f6', t:2, q:'Ско́лько Са́ше лет сего́дня?', zh:'薩沙今天幾歲？', ja:'サーシャは今日何歳？', vi:'Hôm nay Sasha bao nhiêu tuổi?', en:'How old is Sasha today?',
+  a:'Девятна́дцать.', x:['Два́дцать.','Два́дцать оди́н.','Восемна́дцать.','Семна́дцать.','Два́дцать два.']},
+ {id:'f7', t:2, q:'Ско́лько Са́ше лет за́втра?', zh:'薩沙明天幾歲？', ja:'サーシャは明日何歳？', vi:'Ngày mai Sasha bao nhiêu tuổi?', en:'How old will Sasha be tomorrow?',
+  a:'Два́дцать.', x:['Девятна́дцать.','Два́дцать оди́н.','Двена́дцать.','Два́дцать пять.','Восемна́дцать.']},
+ {id:'f8', t:2, q:'Ско́лько Ни́не лет?', zh:'妮娜幾歲？', ja:'ニーナは何歳？', vi:'Nina bao nhiêu tuổi?', en:'How old is Nina?',
+  a:'Два́дцать оди́н год.', x:['Два́дцать лет.','Девятна́дцать лет.','Два́дцать два го́да.','Оди́ннадцать лет.','Два́дцать пять лет.']},
+ {id:'f9', t:2, q:'Что у них за́втра?', zh:'他們明天有什麼？', ja:'明日は何がある？', vi:'Ngày mai họ có gì?', en:'What will they have tomorrow?',
+  a:'Пельме́ни, чай и шокола́д.', x:['Борщ и смета́на.','Суп и ко́фе.','Я́блоки и бана́ны.','Лапша́ и чай.','Мя́со и карто́шка.']},
+ {id:'f10', t:2, q:'Вчера́ Ни́на была́…', zh:'昨天妮娜在……', ja:'昨日ニーナがいたのは……', vi:'Hôm qua Nina ở…', en:'Yesterday Nina was…',
+  a:'в То́кио.', x:['в Москве́.','в Тайбэ́е.','в Ханое.','в Чжунли́.','в аэропорту́.']},
+ {id:'f11', t:3, q:'Кака́я пого́да была́ вчера́?', zh:'昨天天氣怎麼樣？', ja:'昨日の天気は？', vi:'Hôm qua thời tiết thế nào?', en:'What was the weather like yesterday?',
+  a:'Вчера́ была́ плоха́я пого́да.', x:['Вчера́ была́ хоро́шая пого́да.','Вчера́ бы́ло жа́рко.','Вчера́ бы́ло тепло́.','Вчера́ бы́ло хорошо́.','Вчера́ бы́ло хо́лодно и жа́рко.']},
+ {id:'f12', t:3, q:'Что у меня́ бы́ло вчера́?', zh:'昨天我帶了什麼？', ja:'昨日、何を持っていた？', vi:'Hôm qua tôi có gì?', en:'What did I have yesterday?',
+  a:'Зо́нтик.', x:['Такси́.','Борщ.','Па́спорт.','Фотоаппара́т.','Маши́на.']},
+ {id:'f13', t:3, q:'Куда́ я е́ду сего́дня?', zh:'我今天去哪裡？', ja:'今日どこへ行く？', vi:'Hôm nay tôi đi đâu?', en:'Where am I going today?',
+  a:'В Чжунли́, на уро́к.', x:['В Москву́.','В аэропо́рт Таоюа́нь.','В Тайбэ́й.','В То́кио.','В Сеу́л.']},
+ {id:'f14', t:3, q:'Я е́ду…', zh:'我搭……去', ja:'……で行く', vi:'Tôi đi bằng…', en:'I am going by…',
+  a:'на У́бере.', x:['на такси́.','на самолёте.','на маши́не.','на маши́нке.','на рейсе.']},
+ {id:'f15', t:3, q:'Что в рюкзаке́?', zh:'背包裡有什麼？', ja:'リュックの中は？', vi:'Trong ba lô có gì?', en:'What is in the backpack?',
+  a:'Кни́га, телефо́н и зо́нтик.', x:['Борщ и смета́на.','Чай и ко́фе.','Па́спорт и бага́ж.','Кни́га и пельме́ни.','Телефо́н и фотоаппара́т.']}
+];
+const FBY = Object.fromEntries(TQ.map(o=>[o.id,o]));
+
+/* G · собери слово из букв: extra — «ловушки» (типичные ошибки) */
+const TILES = [
+ {w:'сего́дня', extra:['в','и','е']}, {w:'вчера́', extra:['ф','и','е']}, {w:'за́втра', extra:['ф','о','с']},
+ {w:'дождь', extra:['ш','т','ж']},    {w:'хо́лодно', extra:['а','а','л']}, {w:'жа́рко', extra:['ш','о','г']},
+ {w:'тепло́', extra:['и','ь','а']},   {w:'пого́да', extra:['а','в','т']},  {w:'борщ', extra:['ш','а','п']},
+ {w:'свёкла', extra:['о','ф','е']},   {w:'капу́ста', extra:['о','з','б']}, {w:'карто́шка', extra:['а','ж','л']},
+ {w:'мя́со', extra:['а','з','е']},    {w:'смета́на', extra:['и','э','з']}
+];
+const GBY = Object.fromEntries(TILES.map(o=>[plain(o.w),o]));
+
+/* ============================================================
+   ЗВУК. Пока нет записей преподавателя — женский синтезированный голос устройства.
+   Когда появятся записи: REC['ключ'] = ['data:audio/…(дубль 1)', 'data:audio/…(дубль 2)'] —
+   сначала звучат два дубля голоса преподавателя, затем женский голос.
+   ============================================================ */
+const REC = {};
+const recKey = t => plain(t).replace(/[«»"]/g,'').replace(/\s+/g,' ').trim().toLowerCase();
+let voices=[], ruVoices=[], curVoice=null, rateMul=0.9, speakToken=0, curAudio=null;
+const FEMALE = ['google русский','milena','katya','irina','svetlana','ekaterina','alena','tatyana','anna','daria','dariya','polina','ru-ru-standard-a','ru-ru-standard-c','ru-ru-standard-e','female'];
+const MALE = ['yuri','dmitry','pavel','maxim','sergey','male'];
+function refreshVoices(){
+  voices = (window.speechSynthesis ? speechSynthesis.getVoices() : []) || [];
+  ruVoices = voices.filter(v => (v.lang||'').toLowerCase().replace('_','-').startsWith('ru'));
+  if(!curVoice || ruVoices.indexOf(curVoice)<0) curVoice = bestVoice();
+  renderVoiceUI();
+}
+function bestVoice(){
+  if(!ruVoices.length) return null;
+  const nm = v => (v.name||'').toLowerCase();
+  for(const p of FEMALE){ const v = ruVoices.find(v => nm(v).includes(p)); if(v) return v; }
+  return ruVoices.find(v => !MALE.some(m=>nm(v).includes(m))) || ruVoices[0];
+}
+function renderVoiceUI(){
+  const sel = document.getElementById('voiceSel'), warn = document.getElementById('voiceWarn');
+  if(!sel) return;
+  sel.innerHTML='';
+  if(!ruVoices.length){
+    sel.innerHTML='<option>Русский голос не найден · No Russian voice</option>';
+    warn.classList.add('show'); return;
+  }
+  warn.classList.remove('show');
+  ruVoices.forEach((v,i)=>{
+    const o=document.createElement('option'); o.value=i;
+    o.textContent=v.name+(v.localService?'':' (онлайн)'); if(v===curVoice) o.selected=true; sel.appendChild(o);
+  });
+}
+function setVoice(i){ curVoice = ruVoices[+i] || null; speak('сего́дня'); }
+function setRate(r, btn){
+  rateMul = r;
+  document.querySelectorAll('#speeds button').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  speak('Вчера́ бы́ло хо́лодно.');
+}
+if('speechSynthesis' in window){ refreshVoices(); speechSynthesis.onvoiceschanged = refreshVoices; setTimeout(refreshVoices, 800); }
+function stopAll(){
+  speakToken++;
+  if(window.speechSynthesis) speechSynthesis.cancel();
+  if(curAudio){ curAudio.onended=null; curAudio.pause(); curAudio=null; }
+}
+function sayText(t){
+  return plain(t).replace(/\([^)]*\)/g,'').replace(/___/g,' … ').replace(/[^Ѐ-ӿ0-9\s.,!?—–\-…]/g,' ').replace(/\s+/g,' ').trim();
+}
+function speakSeq(list, rate){
+  stopAll();
+  const my = speakToken, items = [];
+  list.forEach(x=>{ const s=sayText(x); if(s) items.push(s); });
+  let i = 0;
+  const tts = (t, done)=>{
+    if(!('speechSynthesis' in window)){ done(); return; }
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang='ru-RU'; if(curVoice) u.voice=curVoice;
+    u.rate = Math.max(0.6, Math.min(1.3, (rate||1)*rateMul));
+    let fired=false; const fin=()=>{ if(!fired){ fired=true; done(); } };
+    u.onend=fin; u.onerror=fin;
+    speechSynthesis.speak(u);
+  };
+  const playTakes = (uris, done)=>{
+    let k=0;
+    const one=()=>{
+      if(my!==speakToken) return;
+      if(k>=uris.length){ done(); return; }
+      curAudio=new Audio(uris[k++]); curAudio.onended=()=>setTimeout(one,350);
+      curAudio.play().catch(()=>setTimeout(one,10));
+    };
+    one();
+  };
+  const next = ()=>{
+    if(my!==speakToken || i>=items.length) return;
+    const t=items[i++], rec=REC[recKey(t)], go=()=>setTimeout(next, 450);
+    if(rec) playTakes([].concat(rec), ()=>tts(t, go));
+    else tts(t, go);
+  };
+  setTimeout(next, 70);
+}
+function speak(text, rate){ speakSeq([text], rate); }
+
+/* ---------- утилиты ---------- */
+function shuffle(a){return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]);}
+function sample(arr,n){return shuffle(arr).slice(0,n);}
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+/* ============================================================
+   НАСТРОЙКИ ДЗ — те же ключи, что в предыдущих ДЗ
+   ============================================================ */
+const CFG = {
+  publicKey   : 'fcPVwgpMK7uXx_D3B',
+  templateId  : 'template_4to8rea',
+  serviceId   : 'collegeorient',
+  teacherEmail: 'collegeorient@gmail.com',
+  lesson      : 'Урок 11 · Вчера, сегодня, завтра',
+  studentMailDomain: 'cycu.org.tw',
+  teacherCopy : false,   /* Bcc на преподавателя настроен в шаблоне → одно письмо на студента */
+  lessonKey   : 'L11',
+  /* СРЕДА ЗАНЯТИЯ, к которому сдаётся это ДЗ (урок 12, дата по Тайваню).
+     Открытие — среда урока 11 (25.11) 18:00; полный балл — до вт 01.12 22:00; −5 — до ср 10:00; −10 — до ср 14:00; позже — 0. */
+  classDate   : '2026-12-02'
+};
+
+/* ---------- список группы: 學號 → строка в таблице (хэши) ---------- */
+const ROSTER = {"22mbv5sj2yr": 4, "2fjefcf1eb0": 5, "12efzlhqafv": 6, "r178psensj": 7, "13ezu2q9nra": 8, "6rnrf35hrc": 9, "12nhnabmpus": 10, "1hv0qyr5cr3": 11, "155ojo8i9vx": 12, "2ahs5vs7q0c": 13, "1k0ujqirlvo": 14, "1ujkxfyrvjr": 15, "73xj0xj4zj": 16, "bbcdk8pfrc": 17, "tifmgams2d": 18, "1aoj0gqn52a": 19, "3zmbdxwegx": 20, "1x11l9bdjms": 21, "243ciz6fmzw": 22, "2cf4fiqds8r": 23, "1ozy0oimb0o": 24, "26nw4f8huw5": 25, "26h280ya4o3": 26, "2gj4ngt8agr": 27, "mt932pygwp": 28};
+function cyrb53(str,seed=0){let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0);}
+function normSid(v){ return String(v).replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/\D/g,''); }
+const TEST_SID = '25700';
+const isTest = sid => sid===TEST_SID;
+function rowOf(sid){ return isTest(sid) ? '000' : (ROSTER[cyrb53('cl242e|'+sid).toString(36)] || null); }
+
+function sentKey(sid){ return 'hw_sent_'+CFG.lessonKey+'_'+sid; }
+function wasSent(sid){ if(isTest(sid)) return false; try{ return !!localStorage.getItem(sentKey(sid)); }catch(e){ return false; } }
+function markSent(sid){ if(isTest(sid)) return; try{ localStorage.setItem(sentKey(sid), new Date().toISOString()); }catch(e){} }
+let sending = false;
+
+/* ============================================================
+   СРОКИ СДАЧИ — время Тайваня (UTC+8)
+   ============================================================ */
+const TWO = 8*3600e3;
+function twAt(dateStr, dayShift, h, m){
+  const [y,mo,d] = dateStr.split('-').map(Number);
+  return Date.UTC(y, mo-1, d+dayShift, h, m) - TWO;
+}
+const DL = {
+  open: twAt(CFG.classDate,-7,18,0),
+  full: twAt(CFG.classDate,-1,22,5),
+  p5:   twAt(CFG.classDate, 0,10,5),
+  p10:  twAt(CFG.classDate, 0,14,5)
+};
+let clockOff = 0, clockSrc = 'device';
+function syncClock(){
+  if(!/^https?:$/.test(location.protocol) || !window.fetch) return Promise.resolve();
+  const t0 = Date.now();
+  return fetch(location.href.split('#')[0], {method:'HEAD', cache:'no-store'})
+    .then(r=>{ const d = Date.parse(r.headers.get('Date')||''); if(!isNaN(d)){ clockOff = d - (t0+Date.now())/2; clockSrc='server'; } })
+    .catch(()=>{});
+}
+function nowMs(){ return Date.now() + clockOff; }
+function lateLevel(t, sid){
+  if(sid && isTest(sid)) return 0;
+  if(t <= DL.full) return 0;
+  if(t <= DL.p5)   return 1;
+  if(t <= DL.p10)  return 2;
+  return 3;
+}
+const PEN = [0,5,10,null];
+function finalOf(raw, lvl){ return lvl===3 ? 0 : Math.max(0, raw - PEN[lvl]); }
+const TW_D = (shift)=>{ const d=new Date(twAt(CFG.classDate,shift,12,0)+TWO); return {d:d.getUTCDate(), m:d.getUTCMonth()+1}; };
+const dTue=TW_D(-1), dWed=TW_D(0), dOpen=TW_D(-7);
+const pad2 = n => String(n).padStart(2,'0');
+const D = {
+  ru: (o,wd)=>`${wd} ${pad2(o.d)}.${pad2(o.m)}`,
+  en: (o,wd)=>`${wd} ${o.d}/${o.m}`,
+  zh: (o,wd)=>`${o.m}/${o.d}（${wd}）`,
+  ja: (o,wd)=>`${o.m}/${o.d}（${wd}）`,
+  vi: (o,wd)=>`${wd} ${o.d}/${o.m}`
+};
+const TUE = {ru:D.ru(dTue,'вт'), en:D.en(dTue,'Tue'), zh:D.zh(dTue,'二'), ja:D.ja(dTue,'火'), vi:D.vi(dTue,'thứ Ba')};
+const WED = {ru:D.ru(dWed,'ср'), en:D.en(dWed,'Wed'), zh:D.zh(dWed,'三'), ja:D.ja(dWed,'水'), vi:D.vi(dWed,'thứ Tư')};
+const OPN = {ru:D.ru(dOpen,'ср'), en:D.en(dOpen,'Wed'), zh:D.zh(dOpen,'三'), ja:D.ja(dOpen,'水'), vi:D.vi(dOpen,'thứ Tư')};
+function twClock(t){ return new Date(t+TWO).toISOString().slice(0,16).replace('T',' '); }
+
+function rulesHTML(){
+  return `<div class="blk"><b>Время — тайваньское. Считается момент нажатия «Отправить».</b><ul>
+      <li>до <b>${TUE.ru}, 22:00</b> — полный балл;</li>
+      <li>до <b>${WED.ru}, 10:00</b> — минус 5 баллов;</li>
+      <li>до <b>${WED.ru}, 14:00</b> — минус 10 баллов;</li>
+      <li>позже — <b>0 баллов</b>.</li></ul></div>
+    <div class="blk en">Taiwan time; what counts is the moment you press “Send”.<ul>
+      <li>by <b>${TUE.en}, 22:00</b> — full score;</li>
+      <li>by <b>${WED.en}, 10:00</b> — minus 5 points;</li>
+      <li>by <b>${WED.en}, 14:00</b> — minus 10 points;</li>
+      <li>later — <b>0 points</b>.</li></ul></div>
+    <div class="blk zh">台灣時間，以按下「寄給老師」的時間為準。<ul>
+      <li><b>${TUE.zh} 22:00</b> 前——全部分數；</li>
+      <li><b>${WED.zh} 10:00</b> 前——扣 5 分；</li>
+      <li><b>${WED.zh} 14:00</b> 前——扣 10 分；</li>
+      <li>之後——<b>0 分</b>。</li></ul></div>
+    <div class="blk ja">台湾時間です。「先生に送る」を押した時刻で判定します。<ul>
+      <li><b>${TUE.ja} 22:00</b> まで —— 満点のまま；</li>
+      <li><b>${WED.ja} 10:00</b> まで —— 5点減点；</li>
+      <li><b>${WED.ja} 14:00</b> まで —— 10点減点；</li>
+      <li>それ以降 —— <b>0点</b>。</li></ul></div>
+    <div class="blk vi">Giờ Đài Loan; tính theo thời điểm em bấm «Gửi cho thầy».<ul>
+      <li>trước <b>22:00 ${TUE.vi}</b> — giữ nguyên điểm;</li>
+      <li>trước <b>10:00 ${WED.vi}</b> — trừ 5 điểm;</li>
+      <li>trước <b>14:00 ${WED.vi}</b> — trừ 10 điểm;</li>
+      <li>sau đó — <b>0 điểm</b>.</li></ul></div>`;
+}
+function lateHTML(lvl){
+  if(lvl===1) return T(`Срок (${TUE.ru}, 22:00) прошёл: при отправке до ${WED.ru}, 10:00 — <b>минус 5 баллов</b>.`,
+                       `The deadline (${TUE.en}, 22:00) has passed: sending before ${WED.en}, 10:00 — <b>minus 5 points</b>.`,
+                       `已超過期限（${TUE.zh} 22:00）：在 ${WED.zh} 10:00 前寄出——<b>扣 5 分</b>。`,
+                       `締切（${TUE.ja} 22:00）を過ぎました。${WED.ja} 10:00 までの送信は<b>5点減点</b>です。`,
+                       `Đã quá hạn (22:00 ${TUE.vi}): gửi trước 10:00 ${WED.vi} — <b>trừ 5 điểm</b>.`);
+  if(lvl===2) return T(`Срок прошёл: при отправке до ${WED.ru}, 14:00 — <b>минус 10 баллов</b>.`,
+                       `The deadline has passed: sending before ${WED.en}, 14:00 — <b>minus 10 points</b>.`,
+                       `已超過期限：在 ${WED.zh} 14:00 前寄出——<b>扣 10 分</b>。`,
+                       `締切を過ぎました。${WED.ja} 14:00 までの送信は<b>10点減点</b>です。`,
+                       `Đã quá hạn: gửi trước 14:00 ${WED.vi} — <b>trừ 10 điểm</b>.`);
+  if(lvl===3) return T(`Срок сдачи закончился (${WED.ru}, 14:00): задание оценивается в <b>0 баллов</b>. Тренироваться можно.`,
+                       `The submission period is over (${WED.en}, 14:00): the homework is graded <b>0 points</b>. You can still practise.`,
+                       `繳交時間已結束（${WED.zh} 14:00）：作業以 <b>0 分</b>計算。仍然可以練習。`,
+                       `提出期間は終了しました（${WED.ja} 14:00）。宿題は<b>0点</b>になります。練習はできます。`,
+                       `Đã hết hạn nộp (14:00 ${WED.vi}): bài được tính <b>0 điểm</b>. Em vẫn có thể luyện tập.`);
+  return '';
+}
+function notOpenHTML(){
+  return T(`Это задание откроется <b>${OPN.ru}, в 18:00</b>.`, `This homework opens on <b>${OPN.en} at 18:00</b>.`,
+           `這份作業在 <b>${OPN.zh} 18:00</b> 開放。`, `この宿題は<b>${OPN.ja} 18:00</b>に公開されます。`,
+           `Bài tập này mở lúc <b>18:00 ${OPN.vi}</b>.`);
+}
+function refreshDeadlineUI(){
+  const t = nowMs(), lvl = lateLevel(t), b = document.getElementById('dlBanner');
+  if(t < DL.open){ b.className='dlbox'; b.innerHTML='🔒 '+notOpenHTML(); b.style.display='block'; }
+  else if(lvl>0){ b.className='dlbox late'; b.innerHTML='⏰ '+lateHTML(lvl); b.style.display='block'; }
+  else { b.style.display='none'; }
+  document.getElementById('dlRules').innerHTML = rulesHTML();
+  const wd = new Date(t+TWO).getUTCDay();
+  if((wd===1 || wd===2) && t >= DL.open && t <= DL.full && document.getElementById('scr-intro').classList.contains('active')) document.getElementById('dlModal').classList.add('show');
+}
+function nextAttempt(sid){
+  const k='hw_att_'+CFG.lessonKey+'_'+sid; let n=1;
+  try{ n=(+localStorage.getItem(k)||0)+1; localStorage.setItem(k,String(n)); }catch(e){}
+  return n;
+}
+function cfgReady(){ return !/СЮДА_/.test(CFG.publicKey) && !/СЮДА_/.test(CFG.templateId); }
+if(window.emailjs && cfgReady()) emailjs.init({publicKey: CFG.publicKey});
+
+
+const STORE = 'hw11_v1';
+let MODE = 'hw';   /* 'hw' — домашнее задание, 'tr' — тренажёр */
+
+/* разделы: [код, русский, English, 中文, кол-во в ДЗ, 日本語, Tiếng Việt] */
+const SECTIONS = [
+ ['A','Послу́шай: что э́то зна́чит?', 'Listen: what does it mean?',     '聽一聽：是什麼意思？', 6, '聞いて：意味は？',        'Nghe: nghĩa là gì?'],
+ ['B','Перево́д → сло́во',           'Translation → word',             '意思 → 俄文',          5, '意味 → ロシア語',         'Nghĩa → từ tiếng Nga'],
+ ['C','Вчера́, сего́дня и́ли за́втра?','Yesterday, today or tomorrow?', '昨天、今天還是明天？', 6, '昨日・今日・明日？',      'Hôm qua, hôm nay hay ngày mai?'],
+ ['D','Был, была́, бы́ло, бы́ли',      'был / была / было / были',      '過去式：был 的四種形式', 6, '過去形：был の4つの形', 'Quá khứ: 4 dạng của был'],
+ ['E','Пого́да: карти́нка → фра́за',   'Weather: picture → sentence',    '天氣：看圖選句子',     4, '天気：絵 → 文',           'Thời tiết: hình → câu'],
+ ['F','Те́ксты: вопро́с — отве́т',     'Texts: question — answer',       '課文：問題與回答',     8, '本文：質問と答え',        'Bài đọc: hỏi — đáp'],
+ ['G','Собери́ сло́во',                'Build the word',                 '拼出單字',             5, '単語を組み立てよう',      'Ghép từ']
+];
+const SEC = Object.fromEntries(SECTIONS.map(s=>[s[0],s]));
+const NQ = SECTIONS.reduce((a,s)=>a+s[4],0);   /* 40 */
+const scoreOf = ok => Math.round(ok*100/NQ);
+const TR_PER = 3;   /* тренажёр: по 3 задания из каждого раздела */
+
+/* ============================================================
+   ГЕНЕРАЦИЯ (в тренажёре — на 2 варианта больше)
+   ============================================================ */
+function pickLeast(pool, n, used){
+  const sh = shuffle(pool); sh.sort((a,b)=>(used[a]||0)-(used[b]||0));
+  const r = sh.slice(0,n); r.forEach(k=>used[k]=(used[k]||0)+1); return r;
+}
+function wordOpts(a, nd){
+  const g = WGROUP[a], same=[], other=[];
+  shuffle(Object.keys(WBY)).forEach(k=>{ if(k===a) return; (WGROUP[k]===g?same:other).push(k); });
+  return shuffle([a, ...[...same,...other].slice(0,nd)]);
+}
+function weaOpts(id, nd){
+  const a = EBY[id].a;
+  const pool = shuffle([...WEA.filter(o=>o.id!==id && plain(o.a)!==plain(a)).map(o=>o.a), ...sample(WEA_TRAPS,2)]);
+  return shuffle([a, ...pool.slice(0,nd)]);
+}
+function genRounds(mode){
+  const tr = mode==='tr', N = k => tr ? TR_PER : SEC[k][4], R=[], used={};
+  const keys = Object.keys(WBY);
+  pickLeast(keys, N('A'), used).forEach(a=>R.push({sec:'A', a, opts:wordOpts(a, tr?5:3)}));
+  pickLeast(keys, N('B'), used).forEach(a=>R.push({sec:'B', a, opts:wordOpts(a, tr?5:3)}));
+  sample(TIMES.map(o=>o.id), N('C')).forEach(id=>R.push({sec:'C', a:id, opts:TIME3.slice()}));
+  sample(PAST.map(o=>o.id), N('D')).forEach(id=>R.push({sec:'D', a:id, opts:BYL.slice()}));
+  sample(WEA.map(o=>o.id), N('E')).forEach(id=>R.push({sec:'E', a:id, opts:weaOpts(id, tr?4:3)}));
+  const per = tr ? [1,1,1] : shuffle([3,3,2]);
+  [1,2,3].forEach((t,i)=>sample(TQ.filter(q=>q.t===t).map(q=>q.id), per[i]).forEach(id=>{
+    const q=FBY[id]; R.push({sec:'F', a:id, opts:shuffle([q.a, ...sample(q.x, tr?5:3)])});
+  }));
+  pickLeast(TILES.map(o=>plain(o.w)), N('G'), used).forEach(a=>{
+    const o=GBY[a];
+    R.push({sec:'G', a, tiles:shuffle([...plain(o.w).split(''), ...sample(o.extra, tr?3:2)])});
+  });
+  return SECTIONS.flatMap(([k])=>shuffle(R.filter(r=>r.sec===k)));
+}
+
+/* ---------- варианты и правильный ответ ---------- */
+function answerOf(r){
+  if(r.sec==='A'||r.sec==='B'||r.sec==='G') return r.a;
+  if(r.sec==='C') return CBY[r.a].a;
+  if(r.sec==='D') return DBY[r.a].a;
+  if(r.sec==='E') return EBY[r.a].a;
+  if(r.sec==='F') return FBY[r.a].a;
+}
+function optText(r, v){
+  if(r.sec==='A'){ const o=WBY[v]; return `${L(o.zh,o.ja,o.vi)}<span class="sm">${o.en}</span>`; }
+  if(r.sec==='B') return acc(WBY[v].w);
+  return acc(v);
+}
+function plainOpt(r, v){
+  if(r.sec==='A') return WBY[v].en;
+  if(r.sec==='B'||r.sec==='G') return plain(WBY[v] ? WBY[v].w : v);
+  return plain(v);
+}
+function optSay(r, v){
+  if(r.sec==='A') return null;
+  if(r.sec==='B') return WBY[v].w;
+  return v;
+}
+function promptSay(r){
+  if(r.sec==='A') return [WBY[r.a].w];
+  if(r.sec==='C') return [CBY[r.a].s];
+  if(r.sec==='D') return [DBY[r.a].s];
+  if(r.sec==='F') return [FBY[r.a].q];
+  if(r.sec==='G') return [GBY[r.a].w];
+  return [];
+}
+const TI = (ru,en,zh,ja,vi) => `${ru} · ${en} · ${L(zh,ja,vi)}`;
+const capFirst = s => s.charAt(0).toUpperCase()+s.slice(1);
+const DAYT = {'вчера́':['昨天','昨日','hôm qua','yesterday'], 'сего́дня':['今天','今日','hôm nay','today'], 'за́втра':['明天','明日','ngày mai','tomorrow']};
+function promptHTML(r){
+  if(r.sec==='A') return `<div class="gw">🔊</div><div class="gloss">${TI('Слушай слово','Listen to the word','聽單字','単語を聞いて','Nghe từ')}</div>`;
+  if(r.sec==='B'){ const o=WBY[r.a]; return `<div class="txcard">${L(o.zh,o.ja,o.vi)}</div><div class="gloss">${o.en}</div>`; }
+  if(r.sec==='C'||r.sec==='D'){ const o=(r.sec==='C'?CBY:DBY)[r.a];
+    return `<div class="sent">${acc(o.s).replace('___','<span class="gap">?</span>')}</div><div class="gloss">${L(o.zh,o.ja,o.vi)} · ${o.en}</div>`; }
+  if(r.sec==='E'){ const o=EBY[r.a], d=DAYT[o.day];
+    return `<div class="who">${acc(capFirst(o.day))} · ${L(d[0],d[1],d[2])} · ${d[3]}</div><div class="pic">${o.pic}${o.deg?`<span class="deg">${o.deg}</span>`:''}</div>`; }
+  if(r.sec==='F'){ const q=FBY[r.a], t=TXT_T[q.t];
+    return txtBox(q.t)+`<div class="who">📖 ${acc(t[0])} · ${L(t[1],t[2],t[3])}</div><div class="sent">${acc(q.q)}</div><div class="gloss">${L(q.zh,q.ja,q.vi)} · ${q.en}</div>`; }
+  if(r.sec==='G'){ const o=WBY[r.a]; return `<div class="gw">🔊</div><div class="gloss">${L(o.zh,o.ja,o.vi)} · ${o.en}</div>`; }
+}
+const TXT_FULL = {"1": {"lines": ["Меня́ зову́т Ле́на.", "Вчера́ у меня́ был уро́к.", "А сего́дня у нас о́тпуск!", "Сего́дня мы е́дем на такси́ в аэропо́рт Таоюа́нь, в терми́нал 2.", "У нас рейс но́мер 692: Тайбэ́й — Сеу́л.", "А за́втра мы в Москве́!"], "tr": ["我叫列娜。昨天我有課。可是今天我們放假了！今天我們搭計程車去桃園機場第二航廈。我們的班機是692號：台北—首爾。明天我們就在莫斯科了！", "私の名前はレーナです。昨日は授業がありました。でも今日から休暇です！今日はタクシーで桃園空港の第2ターミナルへ行きます。私たちの便は692便、台北―ソウルです。明日はもうモスクワです！", "My name is Lena. Yesterday I had a class. But today we are on vacation! Today we are going by taxi to Taoyuan Airport, Terminal 2. Our flight is number 692: Taipei – Seoul. And tomorrow we will be in Moscow!", "Tôi tên là Lena. Hôm qua tôi có giờ học. Còn hôm nay chúng tôi được nghỉ phép! Hôm nay chúng tôi đi taxi đến sân bay Đào Viên, nhà ga 2. Chuyến bay của chúng tôi số 692: Đài Bắc – Seoul. Còn ngày mai chúng tôi đã ở Moskva!"]}, "2": {"lines": ["Ни́на: Са́ша, ско́лько тебе́ лет?", "Са́ша: Сего́дня мне девятна́дцать лет, а за́втра — два́дцать!", "Ни́на: За́втра? Как хорошо́!", "Са́ша: Да! За́втра у нас пельме́ни, чай и шокола́д.", "Са́ша: А тебе́ ско́лько лет?", "Ни́на: Мне два́дцать оди́н год. А вчера́ я была́ в То́кио!"], "tr": ["妮娜：薩沙，你幾歲？ 薩沙：今天我十九歲，明天就二十歲了！ 妮娜：明天？太好了！ 薩沙：對！明天我們有俄式餃子、茶和巧克力。 薩沙：那你幾歲？ 妮娜：我二十一歲。昨天我還在東京呢！", "ニーナ：サーシャ、何歳？ サーシャ：今日は19歳、明日は20歳！ ニーナ：明日？いいね！ サーシャ：うん！明日はペリメニとお茶とチョコレート。 サーシャ：君は何歳？ ニーナ：21歳。昨日は東京にいたの！", "Nina: Sasha, how old are you? Sasha: Today I’m nineteen, and tomorrow — twenty! Nina: Tomorrow? How nice! Sasha: Yes! Tomorrow we’ll have pelmeni, tea and chocolate. Sasha: And how old are you? Nina: I’m twenty-one. And yesterday I was in Tokyo!", "Nina: Sasha, bạn bao nhiêu tuổi? Sasha: Hôm nay tôi 19 tuổi, còn ngày mai — 20! Nina: Ngày mai à? Hay quá! Sasha: Ừ! Ngày mai có pelmeni, trà và sô-cô-la. Sasha: Còn bạn bao nhiêu tuổi? Nina: Tôi 21 tuổi. Hôm qua tôi còn ở Tokyo!"]}, "3": {"lines": ["Вчера́ в Тайбэ́е была́ плоха́я пого́да.", "А у меня́ был зо́нтик.", "Сего́дня пого́да хоро́шая.", "Сего́дня я е́ду на У́бере в Чжунли́, на уро́к.", "В рюкзаке́ — кни́га, телефо́н и зо́нтик.", "А за́втра пого́да хоро́шая и́ли плоха́я?"], "tr": ["昨天台北天氣不好。可是我帶了傘。今天天氣很好。今天我搭 Uber 去中壢上課。背包裡有書、手機和傘。那明天呢？天氣會好還是不好？", "昨日の台北は天気が悪かった。でも私は傘を持っていた。今日はいい天気です。今日はウーバーで中壢へ授業に行きます。リュックには本と携帯と傘。明日の天気はいい？悪い？", "Yesterday the weather in Taipei was bad. But I had an umbrella. Today the weather is good. Today I’m going by Uber to Zhongli, to class. In my backpack: a book, a phone and an umbrella. And tomorrow — will the weather be good or bad?", "Hôm qua thời tiết ở Đài Bắc xấu. Nhưng tôi có ô. Hôm nay thời tiết đẹp. Hôm nay tôi đi Uber đến Trung Lịch để học. Trong ba lô có sách, điện thoại và ô. Còn ngày mai thời tiết đẹp hay xấu?"]}};
+function txtBox(n){ const x=TXT_FULL[n]; if(!x) return '';
+  return `<div class="txtbox">${x.lines.map(l=>{ const m=l.match(/^([^:]{1,12}):\s(.*)$/); return '<div>'+(m?'<b>'+acc(m[1])+':</b> '+acc(m[2]):acc(l))+'</div>'; }).join('')}`+
+    `<details><summary>Перевод · Translation · ${L('翻譯','翻訳','Bản dịch')}</summary><div class="txttr">${L(esc(x.tr[0]),esc(x.tr[1]),esc(x.tr[3]))}<br>${esc(x.tr[2])}</div></details></div>`; }
+const INSTR = {
+ A: ()=>T('Послушай слово. Что оно значит?','Listen to the word. What does it mean?','聽單字，選出它的意思。','単語を聞いて、意味を選んでください。','Nghe từ và chọn nghĩa đúng.'),
+ B: ()=>T('Как это по-русски? Нажми 🔊, чтобы послушать варианты.','How do you say it in Russian? Press 🔊 to hear the options.','用俄文怎麼說？按 🔊 聽選項。','ロシア語で何と言いますか？🔊 で選択肢を聞けます。','Tiếng Nga nói thế nào? Bấm 🔊 để nghe các đáp án.'),
+ C: ()=>T('Смотри на перевод: вчера, сегодня или завтра?','Look at the translation: yesterday, today or tomorrow?','看翻譯：是昨天、今天還是明天？','訳を見て：昨日・今日・明日のどれ？','Xem bản dịch: hôm qua, hôm nay hay ngày mai?'),
+ D: ()=>T('Кто? Найди строку в таблице (он, она, оно, они…) и нажми форму в колонке «вчера».','Who? Find the row in the table (он, она, оно, они…) and tap the form in the “вчера” column.','是誰？在表裡找到那一行（он、она、оно、они……），點「вчера」那一欄的形式。','誰？表で行（он・она・оно・они…）を見つけて、「вчера」の列の形を押してください。','Ai? Tìm hàng trong bảng (он, она, оно, они…) rồi bấm dạng ở cột “вчера”.'),
+ E: ()=>T('Какая погода? Выбери правильную фразу.','What is the weather like? Choose the correct sentence.','天氣怎麼樣？選出正確的句子。','どんな天気？正しい文を選んでください。','Thời tiết thế nào? Chọn câu đúng.'),
+ F: ()=>T('Прочитай текст урока и ответь на вопрос.','Read the lesson text and answer the question.','讀課文，回答問題。','本文を読んで、質問に答えてください。','Đọc bài và trả lời câu hỏi.'),
+ G: ()=>T('Послушай и собери слово из букв. Осторожно: есть лишние буквы!','Listen and build the word from the letters. Careful: some letters are extra!','聽一聽，用字母拼出單字。小心：有多餘的字母！','聞いて、文字を並べて単語を作ろう。注意：余分な文字があります！','Nghe và ghép từ bằng các chữ cái. Cẩn thận: có chữ thừa!')
+};
+const OPTCLS = {A:'tx', B:'', C:'', D:'', E:'sentence', F:'sentence'};
+const WIDE = {A:1, E:1, F:1};
+
+/* ---------- состояние ---------- */
+let st = null, locked = false, built = [];
+function save(){ if(!st || st.trainer) return; try{ localStorage.setItem(STORE, JSON.stringify(st)); }catch(e){} }
+function load(){ try{ return JSON.parse(localStorage.getItem(STORE)||'null'); }catch(e){ return null; } }
+function show(id){
+  stopAll();
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function goMenu(){ if(st && st.trainer) st=null; show('scr-mode'); document.getElementById('topProg').textContent=''; }
+function openHW(){ MODE='hw'; show('scr-intro'); }
+
+/* ============================================================
+   ТРЕНАЖЁР
+   ============================================================ */
+function startTrainer(){
+  MODE='tr';
+  st = {trainer:true, rounds:genRounds('tr'), answers:[], idx:0, t0:Date.now()};
+  show('scr-task'); renderTask();
+}
+function trainerDone(){
+  const ok = st.answers.filter(a=>a&&a.ok).length, n = st.rounds.length;
+  show('scr-trdone');
+  document.getElementById('topProg').textContent='';
+  document.getElementById('trscore').textContent = `${ok} / ${n}`;
+  document.getElementById('trmsg').innerHTML = ok===n ? TI('Всё верно! Молодец!','All correct! Well done!','全部答對！很棒！','全問正解！すばらしい！','Đúng hết! Giỏi lắm!')
+    : TI('Каждый раз задания новые — попробуй ещё раз!','The tasks are new every time — try again!','每次題目都不一樣，再練習一次吧！','毎回問題が変わります。もう一度やってみよう！','Mỗi lần câu hỏi đều mới — thử lại nhé!');
+}
+
+/* ============================================================
+   ПОКАЗ ЗАДАНИЯ
+   ============================================================ */
+function cur(){ return st.rounds[st.idx]; }
+function playCurrent(){
+  const r=cur();
+  if(r.sec==='G'){ speakSeq(promptSay(r), 0.8); return; }
+  const opts = (r.opts||[]).map(v=>optSay(r,v)).filter(Boolean);
+  speakSeq([...promptSay(r), ...opts], 0.85);
+}
+function renderTask(){
+  const r = cur(), n = st.rounds.length;
+  locked = false; built = [];
+  document.getElementById('qbar').style.width = (st.idx/n*100)+'%';
+  document.getElementById('topProg').textContent = `${st.trainer?'🏋️ ':''}${st.idx+1} / ${n}`;
+  const s = SEC[r.sec], inSec = st.rounds.filter(x=>x.sec===r.sec), k = inSec.indexOf(r)+1;
+  document.getElementById('sechead').innerHTML = `${s[0]} · ${acc(s[1])} (${k}/${inSec.length})<small>${s[2]} · ${L(s[3],s[5],s[6])}</small>`;
+  document.getElementById('qfb').innerHTML='';
+  document.getElementById('qnext').style.display='none';
+  document.getElementById('qshow').innerHTML = promptHTML(r);
+  document.getElementById('qinstr').innerHTML = INSTR[r.sec]();
+  const box=document.getElementById('qopts'); box.innerHTML='';
+  if(r.sec==='G'){ renderTiles(r, box); }
+  else if(r.sec==='D'){ renderVerbTable(r, box); }
+  else {
+    box.className='opts'+(WIDE[r.sec]?' wide':'');
+    r.opts.forEach(v=>{
+      const b=document.createElement('div');
+      b.className='opt'+(OPTCLS[r.sec]?' '+OPTCLS[r.sec]:''); b.tabIndex=0; b.innerHTML=optText(r,v); b.dataset.v=v;
+      b.onclick=()=>choose(b,v);
+      b.onkeydown=e=>{ if(e.key==='Enter') choose(b,v); };
+      const sy = optSay(r,v);
+      if(sy){
+        const btn=document.createElement('button');
+        btn.className='say'; btn.type='button'; btn.textContent='🔊'; btn.setAttribute('aria-label','listen');
+        btn.onclick=e=>{ e.stopPropagation(); speak(sy, 0.85); };
+        b.appendChild(btn);
+      }
+      box.appendChild(b);
+    });
+  }
+  const ps = promptSay(r);
+  if(ps.length) setTimeout(()=>{ if(st && cur()===r && !locked) speakSeq(ps, r.sec==='G'?0.8:0.85); }, 380);
+}
+/* --- таблица глагола БЫТЬ: ответ выбирается прямо из таблицы --- */
+const BYT_ROWS = [
+ ['я',  'я (он)',  ['был','была́'],  'бу́ду',   '我','私','tôi'],
+ ['ты', 'ты',      ['был','была́'],  'бу́дешь', '你','君','bạn'],
+ ['он', 'он',      ['был'],          'бу́дет',  '他（陽性）','彼（男性）','anh ấy (giống đực)'],
+ ['она','она́',    ['была́'],        'бу́дет',  '她（陰性）','彼女（女性）','cô ấy (giống cái)'],
+ ['оно','оно́',    ['бы́ло'],        'бу́дет',  '它（中性）','それ（中性）','nó (giống trung)'],
+ ['мы', 'мы',      ['бы́ли'],        'бу́дем',  '我們','私たち','chúng tôi'],
+ ['вы', 'вы',      ['бы́ли'],        'бу́дете', '你們／您','あなたたち','các bạn'],
+ ['они','они́',    ['бы́ли'],        'бу́дут',  '他們','彼ら','họ']
+];
+function renderVerbTable(r, box){
+  box.className='vtbox';
+  const cell=(v)=>`<span class="opt vchip" tabindex="0" data-v="${v}">${acc(v)}</span>`;
+  const rows=BYT_ROWS.map(([k,lab,past,fut,zh,ja,vi])=>{
+    const p = k==='я'||k==='ты' ? cell('был')+' <small>(он)</small> '+cell('была́')+' <small>('+acc('она́')+')</small>' : past.map(cell).join(' ');
+    return `<tr><th>${acc(lab.replace(' (он)',''))}<small>${L(zh,ja,vi)}</small></th><td class="past">${p}</td><td class="pres">—</td><td class="fut">${cell(fut)}</td></tr>`;
+  }).join('');
+  box.innerHTML = `<div class="vthead">📋 БЫТЬ · ${L('「是／在／有」的變化','「ある・いる・だ」の変化','chia động từ “быть”')} · to be</div>
+   <table class="vt"><thead><tr><th></th>
+     <th>${acc('вчера́')} <small>${L('過去','過去','quá khứ')} · past</small></th>
+     <th>${acc('сего́дня')} <small>${L('現在','現在','hiện tại')} · present</small></th>
+     <th>${acc('за́втра')} <small>${L('未來','未来','tương lai')} · future</small></th></tr></thead><tbody>${rows}</tbody></table>
+   <div class="vtnote">${T('Сегодня глагол не нужен: «Сегодня у меня урок». Выбери нужную форму прямо в таблице.','Today: no verb (“Сегодня у меня урок”). Choose the form right in the table.','「今天」不需要動詞。直接在表裡點選正確的形式。','「今日」は動詞なし。表の中から正しい形を選んでください。','“Hôm nay”: không cần động từ. Chọn dạng đúng ngay trong bảng.')}</div>`;
+  box.querySelectorAll('.vchip').forEach(b=>{
+    b.onclick=()=>choose(b,b.dataset.v);
+    b.onkeydown=e=>{ if(e.key==='Enter') choose(b,b.dataset.v); };
+  });
+}
+/* --- собери слово --- */
+function renderTiles(r, box){
+  box.className='tilesbox';
+  box.innerHTML = `<div class="slot" id="slot"></div>
+    <div class="tiles" id="tiles"></div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn ghost sm" id="tback" onclick="tileBack()">⌫ ${TI('Стереть','Delete','刪除','消す','Xóa')}</button>
+      <button class="btn sm" id="tok" onclick="tileDone()">✓ ${TI('Готово','Done','完成','できた','Xong')}</button>
+    </div>`;
+  const tw=document.getElementById('tiles');
+  r.tiles.forEach((ch,i)=>{
+    const b=document.createElement('button'); b.type='button'; b.className='tile'; b.textContent=ch; b.dataset.i=i;
+    b.onclick=()=>{ if(locked||b.disabled) return; built.push(i); b.disabled=true; drawSlot(); };
+    tw.appendChild(b);
+  });
+  drawSlot();
+}
+function drawSlot(){
+  const r=cur();
+  document.getElementById('slot').innerHTML = built.length ? built.map(i=>`<span>${r.tiles[i]}</span>`).join('') : '<em>…</em>';
+}
+function tileBack(){
+  if(locked||!built.length) return;
+  const i=built.pop(); const b=document.querySelector(`#tiles .tile[data-i="${i}"]`); if(b) b.disabled=false; drawSlot();
+}
+function tileDone(){
+  if(locked) return;
+  const r=cur(), given=built.map(i=>r.tiles[i]).join('');
+  if(!given) return;
+  choose(null, given);
+}
+function choose(el, v){
+  if(locked) return; locked=true;
+  const r=cur(), a=answerOf(r), ok = r.sec==='G' ? v===plain(GBY[r.a].w) : v===a;
+  st.answers[st.idx] = {sec:r.sec, item:itemLabel(r), given: r.sec==='G'? v : plainOpt(r,v), right: plainOpt(r,a), ok};
+  save();
+  const fb=document.getElementById('qfb');
+  if(r.sec==='G'){ document.getElementById('tback').disabled=true; document.getElementById('tok').disabled=true;
+    document.querySelectorAll('#tiles .tile').forEach(t=>t.disabled=true); }
+  else document.querySelectorAll('#qopts .opt').forEach(o=>{ if(o!==el) o.classList.add('dim'); });
+  if(st.trainer){
+    if(r.sec==='G') document.getElementById('slot').classList.add(ok?'good':'bad');
+    else {
+      el.classList.add(ok?'good':'bad');
+      if(!ok){ [...document.querySelectorAll('#qopts .opt')].filter(o=>o.dataset.v===String(a)).forEach(c=>{ c.classList.remove('dim'); c.classList.add('good'); }); }
+    }
+    fb.innerHTML = ok ? '✓ '+TI('Верно!','Correct!','答對了！','正解！','Đúng rồi!')
+                      : '✗ '+TI('Правильно','Correct answer','正確答案','正解','Đáp án đúng')+': <b>'+(r.sec==='A'?optText(r,a):acc(r.sec==='G'?GBY[r.a].w:(r.sec==='B'?WBY[a].w:a)))+'</b>';
+    fb.style.color = ok ? 'var(--mint-d)' : 'var(--coral-d)';
+    const sy = r.sec==='G' ? GBY[r.a].w : optSay(r,a);
+    if(!ok && sy) setTimeout(()=>speak(sy,0.85), 250);
+  } else {
+    if(el) el.classList.add('sel'); else document.getElementById('slot').classList.add('sel');
+    fb.style.color=''; fb.innerHTML='Ответ принят · Answer saved · '+L('已作答','回答しました','Đã ghi nhận');
+  }
+  document.getElementById('qnext').style.display='inline-block';
+  document.getElementById('qnext').focus({preventScroll:true});
+}
+function nextTask(){
+  if(!locked || !st || st.finished) return;
+  st.idx++; save();
+  if(st.idx < st.rounds.length){ renderTask(); return; }
+  if(st.trainer){ trainerDone(); return; }
+  st.finished=true; st.t1=Date.now();
+  st.reveal = [];
+  SECTIONS.forEach(([k])=>{
+    const idx = st.rounds.map((r,i)=>r.sec===k?i:-1).filter(i=>i>=0);
+    const h = Math.floor(idx.length/2) + (idx.length%2 && Math.random()<0.5 ? 1 : 0);
+    st.reveal.push(...sample(idx,h));
+  });
+  save();
+  showDone();
+}
+/* для отчёта преподавателю */
+function itemLabel(r){
+  const a = plainOpt(r, answerOf(r));
+  if(r.sec==='A') return `На слух: ${plain(WBY[r.a].w)} → ${a}`;
+  if(r.sec==='B') return `«${WBY[r.a].en}» → ${a}`;
+  if(r.sec==='C') return `${plain(CBY[r.a].s)} → ${a}`;
+  if(r.sec==='D') return `${plain(DBY[r.a].s)} → ${a}`;
+  if(r.sec==='E') return `Погода ${plain(EBY[r.a].day)} ${EBY[r.a].deg||'дождь'} → ${a}`;
+  if(r.sec==='F') return `Текст ${FBY[r.a].t}: ${plain(FBY[r.a].q)} → ${a}`;
+  if(r.sec==='G') return `Собери слово → ${a}`;
+}
+/* для разбора у студента */
+function studentPrompt(r){
+  if(r.sec==='A') return '🔊 '+acc(WBY[r.a].w);
+  if(r.sec==='B') return `${L(WBY[r.a].zh,WBY[r.a].ja,WBY[r.a].vi)} · ${WBY[r.a].en}`;
+  if(r.sec==='C') return acc(CBY[r.a].s);
+  if(r.sec==='D') return acc(DBY[r.a].s);
+  if(r.sec==='E'){ const o=EBY[r.a]; return `${acc(capFirst(o.day))}: ${o.pic} ${o.deg}`; }
+  if(r.sec==='F') return `📖 ${FBY[r.a].t}. ${acc(FBY[r.a].q)}`;
+  if(r.sec==='G') return `🔊 ${L(WBY[r.a].zh,WBY[r.a].ja,WBY[r.a].vi)} · ${WBY[r.a].en}`;
+}
+
+/* ---------- анкета ---------- */
+const PRACTICE_SID = '000';
+function initForm(){
+  const names = ['Леони́д','Лёня','Влади́мир','Воло́дя','Ю́лия','Ю́ля','Я́на','Ми́ла','Людми́ла','Любо́вь',
+                 'Раи́са','Ра́я','Поли́на','По́ля','А́нна','Аню́та','А́ня','Со́фья','Софи́я','Со́ня',
+                 'Ли́лия','Ли́ля','Еле́на','Ле́на','Алёна','Алекса́ндр','Са́ша','Шу́ра','Ни́на','Ни́ночка',
+                 'Ири́на','И́ра','Екатери́на','Ка́тя'];
+  document.getElementById('ruNames').innerHTML = names.map(n=>`<option value="${plain(n)}">`).join('');
+  const fid = document.getElementById('fId'), fmail = document.getElementById('fMail');
+  let touched = false;
+  fmail.addEventListener('input', ()=>{ touched = true; });
+  fid.addEventListener('input', ()=>{
+    if(touched) return;
+    const raw = String(fid.value).trim(), v = normSid(raw);
+    fmail.value = (v && !isTest(v) && v!==PRACTICE_SID) ? v + '@' + CFG.studentMailDomain : '';
+  });
+  const s = load();
+  if(s && s.rounds && s.idx < s.rounds.length){
+    document.getElementById('resumeRow').style.display='flex';
+    document.getElementById('resumeInfo').textContent = `(${s.student.ru} · ${s.idx}/${s.rounds.length})`;
+  }else if(s && s.finished){
+    document.getElementById('resumeRow').style.display='flex';
+    document.getElementById('resumeInfo').innerHTML = `(${esc(s.student.ru)} · итог · ${L('成績','結果','kết quả')})`;
+  }
+}
+function beginRun(student, practice){
+  const old = load();
+  if(old && old.idx>0 && !old.finished &&
+     !confirm('Начать заново? Сохранённый прогресс будет удалён.\nStart over? Saved progress will be lost.\n'+
+       P('重新開始？已儲存的進度會被刪除。','最初からやり直しますか？保存された進み具合は消えます。','Bắt đầu lại? Tiến độ đã lưu sẽ bị xóa.'))) return;
+  document.getElementById('formErr').textContent='';
+  st = {student, rounds:genRounds('hw'), answers:[], idx:0, t0:Date.now(), finished:false, sent:false, practice, attempt:nextAttempt(student.sid)};
+  save();
+  show('scr-task'); renderTask();
+}
+function startHW(){
+  let zh=document.getElementById('fZh').value.trim(), ru=document.getElementById('fRu').value.trim();
+  const sid=normSid(document.getElementById('fId').value), mail=document.getElementById('fMail').value.trim();
+  const err=document.getElementById('formErr');
+  if(sid===PRACTICE_SID){
+    if(!ru){ err.innerHTML='Напиши своё русское имя · Write your Russian name · '+L('請填寫俄文名字','ロシア語の名前を書いてください','Hãy viết tên tiếng Nga của em'); return; }
+    beginRun({zh:zh||'—', ru, sid, mail:'', row:null, noSend:true}, false); return;
+  }
+  if(isTest(sid) && !mail){ beginRun({zh:zh||'ТЕСТ', ru:ru||'Тест', sid, mail:'', row:rowOf(sid), noSend:true}, false); return; }
+  if(isTest(sid)){ zh = zh||'ТЕСТ'; ru = ru||'Тест'; }
+  if(!zh||!ru||!sid){ err.innerHTML='Заполни все поля · Please fill in all fields · '+L('請填寫所有欄位','すべて入力してください','Hãy điền đủ các ô'); return; }
+  if(!/^\S+@\S+\.\S+$/.test(mail)){ err.innerHTML='Проверь e-mail · Check your e-mail · '+L('請檢查 e-mail','メールアドレスを確認してください','Kiểm tra lại e-mail'); return; }
+  if(!isTest(sid) && nowMs() < DL.open){ err.innerHTML='🔒 '+notOpenHTML(); return; }
+  const row = rowOf(sid);
+  if(!row && !confirm('Номера '+sid+' нет в списке группы. Проверь 學號! Всё верно?\n'+
+       'Student ID '+sid+' is not on the class list. Is it correct?\n'+
+       P('學號 '+sid+' 不在名單上，請再確認。確定正確嗎？','学籍番号 '+sid+' は名簿にありません。正しいですか？','Mã số '+sid+' không có trong danh sách lớp. Em chắc chắn đúng chứ?'))) return;
+  const practice = wasSent(sid);
+  if(practice && !confirm('Ты уже отправил(а) это задание. Сейчас можно только потренироваться — результат НЕ будет отправлен.\n'+
+       'You have already submitted this homework. This will be practice only (not sent).\n'+
+       P('你已經交過這份作業了。現在只能練習，成績不會再寄出。','この宿題はもう送信済みです。これは練習で、結果は送信されません。','Em đã nộp bài này rồi. Lần này chỉ là luyện tập, kết quả sẽ không được gửi.'))) return;
+  beginRun({zh,ru,sid,mail,row}, practice);
+}
+function resumeHW(){
+  st = load(); if(!st) return; MODE='hw';
+  if(st.finished){ showDone(); return; }
+  show('scr-task'); renderTask();
+}
+
+
+/* ============================================================
+   ИТОГ, РАЗБОР И ОТПРАВКА
+   ============================================================ */
+function stats(){
+  const ans=st.answers.filter(Boolean);
+  const ok=ans.filter(a=>a.ok).length;
+  const secs={};
+  SECTIONS.forEach(([k,ru])=>{ secs[k]={name:ru, ok:0, n:0}; });
+  ans.forEach(a=>{ secs[a.sec].n++; if(a.ok) secs[a.sec].ok++; });
+  const mins=Math.max(1,Math.round(((st.t1||Date.now())-st.t0)/60000));
+  return {ans, ok, score:scoreOf(ok), secs, mins};
+}
+const HIDE = '🤫 '+'Пока не скажу — подумай сам(а) · I won’t tell you yet — figure it out yourself · '+L('先不告訴你——自己想一想','まだ教えません——自分で考えてみて','Chưa nói đâu — em tự suy nghĩ nhé');
+function fullReview(){ return st.sent || isTest(st.student.sid); }
+function renderReview(){
+  const full = fullReview();
+  document.getElementById('revNote').innerHTML = full ? '' :
+    `<div class="revnote">👀 ${T('Это <b>выборочный</b> разбор: показана примерно половина заданий (выбраны случайно). Остальные ответы проверь сам(а). Полный разбор — после отправки результата.',
+      'This is a <b>selective</b> review: about half of the tasks are shown (chosen at random). Check the others yourself. The full review appears after you send your result.',
+      '這是<b>部分</b>檢討：只隨機顯示大約一半的題目，其他的請自己想一想。寄出成績後才會顯示全部答案。',
+      'これは<b>一部だけ</b>の答え合わせです。ランダムに選んだ約半分の問題だけを表示しています。残りは自分で考えてみてください。結果を送信すると、すべての答えが表示されます。',
+      'Đây là phần chữa bài <b>chọn lọc</b>: chỉ hiện khoảng một nửa số câu (chọn ngẫu nhiên). Các câu còn lại em tự kiểm tra nhé. Sau khi gửi kết quả sẽ hiện toàn bộ đáp án.')}</div>`;
+  const items = st.rounds.map((r,i)=>{
+    const a = st.answers[i]; if(!a) return '';
+    const head = `<span class="q">${SEC[r.sec][0]}. ${studentPrompt(r)}</span>`;
+    if(!full && !(st.reveal||[]).includes(i)) return `<li class="h">${head}<br>${HIDE}</li>`;
+    const res = a.ok ? `✓ ${esc(a.given)}` : `✗ ${esc(a.given)} → <b>${esc(a.right)}</b>`;
+    return `<li class="${a.ok?'y':'n'}">${head}<br><span class="res">${res}</span></li>`;
+  });
+  document.getElementById('dlist').innerHTML='<ol>'+items.join('')+'</ol>';
+}
+function showDone(){
+  const {ans, ok, score, secs, mins} = stats();
+  show('scr-done');
+  document.getElementById('topProg').textContent='';
+  document.getElementById('dtitle').innerHTML =
+    score>=90 ? 'Отлично! · Excellent! · '+L('太棒了!','すばらしい！','Xuất sắc!') :
+    score>=70 ? 'Хорошо! · Good! · '+L('很好!','よくできました！','Tốt lắm!') :
+    score>=50 ? 'Неплохо · Not bad · '+L('還可以','まあまあ','Khá') :
+                'Надо повторить · Review needed · '+L('要再複習','復習しましょう','Cần ôn lại');
+  document.getElementById('dscore').textContent = score+' / 100';
+  showLateLine();
+  document.getElementById('dmsg').textContent = `${st.student.ru} · ${st.student.zh} · ${st.student.sid} · ${ok} из ${ans.length} · ${mins} мин`;
+  let rows='<table>';
+  SECTIONS.forEach(([k,ru,en,zh,n,ja,vi])=>{
+    const s=secs[k];
+    rows+=`<tr><td>${k}. ${acc(ru)}<br><span style="color:var(--plum-soft);font-size:.75rem">${L(zh,ja,vi)} · ${en}</span></td><td>${s.ok} / ${s.n}</td><td></td></tr>`;
+  });
+  rows+=`<tr class="tot"><td>Итого · Total · ${L('總分','合計','Tổng')}</td><td>${ok} / ${ans.length}</td><td><b>${score}</b></td></tr></table>`;
+  document.getElementById('dbreak').innerHTML=rows;
+  renderReview();
+  window.REPORT = reportText();
+  document.getElementById('mailtoLink').href = 'mailto:'+CFG.teacherEmail+'?subject='+
+    encodeURIComponent('Стр. '+(st.student.row||'?')+' · ДЗ '+CFG.lesson+' — '+st.student.sid+' '+st.student.zh)+'&body='+encodeURIComponent(window.REPORT);
+  if(st.student.noSend && st.student.sid===PRACTICE_SID) setStatus('🔁 '+T('Тренировка (номер 000): результат никуда не отправляется. Можно пройти ещё раз.',
+      'Practice (ID 000): the result is not sent anywhere. You can try again.',
+      '練習模式（000）：成績不會寄出。可以再練習一次。',
+      '練習モード（000）：結果は送信されません。もう一度できます。',
+      'Luyện tập (000): kết quả không được gửi. Em có thể làm lại.'), 'again');
+  else if(st.student.noSend) setStatus('🧪 ТЕСТ: прогон без отправки (e-mail не введён), разбор полный. Нажми «Тренироваться ещё», чтобы пройти заново.', 'again');
+  else if(st.sent) showSent();
+  else if(st.practice || wasSent(st.student.sid)) showPractice();
+  else showDecision();
+}
+function setStatus(html, mode){
+  document.getElementById('sendStatus').innerHTML=html;
+  document.getElementById('decideBtns').style.display = mode==='decide'?'flex':'none';
+  document.getElementById('againBtns').style.display  = mode==='again' ?'flex':'none';
+  document.getElementById('sendBtns').style.display   = mode==='fail'  ?'flex':'none';
+}
+function showLateLine(){
+  const el = document.getElementById('dlate'), raw = stats().score;
+  if(st.sent && st.lvl!==undefined){
+    el.innerHTML = st.lvl ? `Засчитано · Counted · ${L('實得分數','採点','Điểm được tính')}: ${st.final} / 100 (${st.lvl===3?'0':raw+' − '+PEN[st.lvl]})` : '';
+    return;
+  }
+  if(st.practice || wasSent(st.student.sid)){ el.innerHTML=''; return; }
+  const lvl = lateLevel(nowMs(), st.student.sid);
+  el.innerHTML = lvl ? `${lateHTML(lvl)}<br>→ ${finalOf(raw,lvl)} / 100` : '';
+}
+function showDecision(){
+  const lvl = lateLevel(nowMs(), st.student.sid);
+  const dl = lvl===0 && !isTest(st.student.sid)
+    ? '<br>⏰ '+T(`Срок: <b>${TUE.ru}, 22:00</b>.`, `Deadline: <b>${TUE.en}, 22:00</b>.`, `期限：<b>${TUE.zh} 22:00</b>。`, `締切：<b>${TUE.ja} 22:00</b>。`, `Hạn: <b>22:00 ${TUE.vi}</b>.`)
+    : '';
+  setStatus(T('Доволен(а) результатом? Тогда отправь его преподавателю — отправить можно <b>только один раз</b>. Хочешь больше баллов — пройди задание заново (этот результат не отправится).',
+           'Happy with your score? Send it to the teacher — you can send <b>only once</b>. Want a better score? Start again (this result will not be sent).',
+           '對分數滿意嗎？那就寄給老師——成績<b>只能寄一次</b>。想拿更高分，可以重新作答（這次的成績不會寄出）。',
+           'この点数でよければ、先生に送ってください（送信できるのは<b>1回だけ</b>）。もっと点数を上げたいなら、もう一度やり直せます（今回の結果は送られません）。',
+           'Em hài lòng với điểm này chưa? Nếu rồi thì gửi cho thầy — <b>chỉ được gửi một lần</b>. Muốn điểm cao hơn thì làm lại từ đầu (kết quả lần này sẽ không được gửi).')+dl, 'decide');
+}
+function showSent(){
+  if(isTest(st.student.sid)){
+    setStatus('✅ ТЕСТ: письмо отправлено на '+esc(st.student.mail)+'. Для тестового 學號 '+TEST_SID+
+              ' отправлять можно сколько угодно раз — нажми «Тренироваться ещё» и пройди заново.', 'again'); return;
+  }
+  setStatus('✅ '+T('Результат отправлен на '+esc(st.student.mail)+' и преподавателю. Ниже — полный разбор. Дальше можно тренироваться — результаты больше не отправляются.',
+              'Your result has been sent to you and the teacher. The full review is below. You can keep practising; results will not be sent again.',
+              '成績已寄給你和老師（如果沒看到，請檢查垃圾郵件）。下面是全部答案。之後還可以繼續練習，但成績不會再寄出。',
+              '結果をあなたと先生に送りました（届かない場合は迷惑メールフォルダを確認してください）。下にすべての答えがあります。このあとも練習できますが、結果はもう送信されません。',
+              'Đã gửi kết quả cho em và thầy (nếu không thấy, hãy kiểm tra thư rác). Bên dưới là toàn bộ đáp án. Em vẫn có thể luyện tập tiếp, nhưng kết quả sẽ không được gửi nữa.'), 'again');
+}
+function showPractice(){
+  setStatus('🔁 '+T('Это тренировка: задание уже было отправлено раньше. Этот результат не отправляется.',
+              'Practice only: this homework was already sent. This result is not sent.',
+              '這是練習：作業之前已經寄出了，這次的成績不會寄出。',
+              'これは練習です。宿題はすでに送信済みなので、今回の結果は送られません。',
+              'Đây là luyện tập: bài đã được gửi trước đó, kết quả lần này không được gửi.'), 'again');
+}
+async function confirmSend(){
+  await syncClock();
+  const raw = stats().score, lvl = lateLevel(nowMs(), st.student.sid), sc = finalOf(raw, lvl);
+  showLateLine();
+  const late = !lvl ? '' :
+    (lvl===3 ? 'Срок сдачи закончился — будет засчитано 0 баллов.\nThe deadline is over — 0 points will be counted.\n'+
+               P('繳交時間已結束，以 0 分計算。','提出期限が過ぎたため、0点になります。','Đã hết hạn nộp, sẽ tính 0 điểm.')
+             : 'Опоздание: −'+PEN[lvl]+' баллов ('+raw+' → '+sc+').\nLate: −'+PEN[lvl]+' points ('+raw+' → '+sc+').\n'+
+               P('遲交：扣 '+PEN[lvl]+' 分（'+raw+' → '+sc+'）。','遅れて提出：'+PEN[lvl]+'点減点（'+raw+' → '+sc+'）。','Nộp trễ: trừ '+PEN[lvl]+' điểm ('+raw+' → '+sc+').'))+'\n\n';
+  if(!confirm(late+'Отправить результат '+sc+'/100 преподавателю? Потом изменить будет нельзя.\n'+
+              'Send your result '+sc+'/100 to the teacher? You cannot change it later.\n'+
+              P('確定要把 '+sc+'/100 分寄給老師嗎？寄出後就不能再改。',
+                sc+'/100点を先生に送信しますか？送信後は変更できません。',
+                'Gửi kết quả '+sc+'/100 cho thầy? Sau khi gửi sẽ không thể thay đổi.'))) return;
+  sendResults();
+}
+function restartHW(){
+  if(!st) return;
+  const unsent = !st.sent && !st.practice && !wasSent(st.student.sid) && !st.student.noSend;
+  if(unsent){
+    const sc = stats().score;
+    if(!confirm('Пройти задание заново? Этот результат ('+sc+'/100) не будет отправлен.\n'+
+                'Start again? This result ('+sc+'/100) will not be sent.\n'+
+                P('重新作答？這次的成績（'+sc+'/100）不會寄出。',
+                  'やり直しますか？今回の結果（'+sc+'/100点）は送信されません。',
+                  'Làm lại từ đầu? Kết quả lần này ('+sc+'/100) sẽ không được gửi.'))) return;
+  }
+  const sid = st.student.sid;
+  st = {student:st.student, rounds:genRounds('hw'), answers:[], idx:0, t0:Date.now(), finished:false, sent:false,
+        practice:wasSent(sid), attempt:nextAttempt(sid)};
+  save();
+  show('scr-task'); renderTask();
+}
+const LATE_RU = ['вовремя','после вт 22:00: −5','после ср 10:00: −10','после ср 14:00: 0 баллов'];
+function reportText(){
+  const {ans, ok, score, secs, mins} = stats();
+  const R=[];
+  R.push(CFG.lesson+' — домашнее задание'+(isTest(st.student.sid)?'   [ТЕСТ преподавателя]':''));
+  R.push('中文姓名: '+st.student.zh);
+  R.push('Русское имя: '+st.student.ru);
+  R.push('學號: '+st.student.sid);
+  R.push('Строка таблицы: № '+(st.student.row||'? (нет в списке)'));
+  R.push('E-mail: '+st.student.mail);
+  R.push('');
+  const lvl = st.lvl||0, fin = st.final!==undefined ? st.final : score;
+  R.push('ИТОГОВЫЙ БАЛЛ: '+fin+' / 100'+(lvl ? '   (набрано '+score+', '+LATE_RU[lvl]+')' : ''));
+  R.push('('+ok+' из '+ans.length+' заданий, '+mins+' мин, попытка № '+(st.attempt||1)+')');
+  R.push('');
+  SECTIONS.forEach(([k,ru])=>R.push('  '+k+'. '+plain(ru)+': '+secs[k].ok+'/'+secs[k].n));
+  R.push('');
+  R.push('Ответы:');
+  ans.forEach((a,i)=>R.push('  '+(i+1)+'. '+a.item+' — '+a.given+' '+(a.ok?'OK':'X')));
+  R.push('');
+  R.push('Отправлено: '+twClock(st.sentAt||nowMs())+' (Тайвань)'+(clockSrc==='server'?'':' — по часам устройства'));
+  return R.join('\n');
+}
+function baseParams(){
+  const {ans, ok, score, secs, mins} = stats();
+  const lvl = st.lvl||0, fin = st.final!==undefined ? st.final : score;
+  return {
+    raw_score: String(score),
+    penalty: lvl===3 ? String(score) : String(PEN[lvl]),
+    late: LATE_RU[lvl],
+    lesson: CFG.lesson,
+    student_no: String(st.student.row||'?'),
+    row: String(st.student.row||'?'),
+    attempt: String(st.attempt||1),
+    name_zh: st.student.zh,
+    name_ru: st.student.ru,
+    student_id: st.student.sid,
+    student_email: st.student.mail,
+    score: String(fin),
+    max_score: '100',
+    correct: ok+' / '+ans.length,
+    minutes: String(mins),
+    breakdown: (lvl ? 'Набрано '+score+', '+LATE_RU[lvl]+' → итог '+fin+'\n\n' : '')+SECTIONS.map(([k,ru])=>k+'. '+plain(ru)+': '+secs[k].ok+'/'+secs[k].n).join('\n'),
+    details: 'Строка таблицы: № '+(st.student.row||'?')+' · попытка № '+(st.attempt||1)+'\n\n'+ans.map((a,i)=>(i+1)+'. '+a.item+' — '+a.given+' '+(a.ok?'OK':'X')).join('\n'),
+    sent_at: twClock(st.sentAt||nowMs())+' (Тайвань)',
+    report: window.REPORT
+  };
+}
+function sendResults(){
+  if(!cfgReady()){
+    setStatus(T('Автоотправка не настроена. Скопируй результат и пришли преподавателю.','Auto-sending is not set up. Copy your result and send it to the teacher.',
+                '自動寄送尚未設定，請複製成績寄給老師。','自動送信が設定されていません。結果をコピーして先生に送ってください。','Chưa cài đặt gửi tự động. Hãy sao chép kết quả và gửi cho thầy.'), 'fail'); return;
+  }
+  if(!window.emailjs){
+    setStatus(T('Не загрузилась программа отправки (нет интернета или её блокирует браузер). Скопируй результат и пришли преподавателю.',
+                'The sending library did not load (no internet or blocked by the browser). Copy your result and send it to the teacher.',
+                '寄信程式沒有載入（網路或瀏覽器阻擋），請複製成績寄給老師。',
+                '送信プログラムが読み込めませんでした（ネット接続またはブラウザの制限）。結果をコピーして先生に送ってください。',
+                'Không tải được chương trình gửi thư (mất mạng hoặc trình duyệt chặn). Hãy sao chép kết quả và gửi cho thầy.'), 'fail'); return;
+  }
+  if(sending || st.sent || st.student.noSend) return;
+  if(st.practice || wasSent(st.student.sid)){ showPractice(); return; }
+  sending = true;
+  st.sentAt = nowMs();
+  st.lvl = lateLevel(st.sentAt, st.student.sid);
+  st.final = finalOf(stats().score, st.lvl);
+  window.REPORT = reportText();
+  document.getElementById('mailtoLink').href = 'mailto:'+CFG.teacherEmail+'?subject='+
+    encodeURIComponent((st.student.row||'?')+' · '+st.final+'/100 · ДЗ '+CFG.lesson+' — '+st.student.zh+' '+st.student.sid)+'&body='+encodeURIComponent(window.REPORT);
+  const p=baseParams();
+  setStatus('Отправляю… · Sending… · '+L('正在寄出成績…','送信中…','Đang gửi…'), 'none');
+  let chain = emailjs.send(CFG.serviceId, CFG.templateId, Object.assign({}, p, {to_email:st.student.mail, to_name:st.student.ru}));
+  if(CFG.teacherCopy)
+    chain = chain.then(()=>emailjs.send(CFG.serviceId, CFG.templateId, Object.assign({}, p, {to_email:CFG.teacherEmail, to_name:'Преподаватель'})));
+  chain.then(()=>{
+      sending=false; st.sent=true; save(); markSent(st.student.sid);
+      showSent(); showLateLine(); renderReview();
+    })
+    .catch(err=>{
+      sending=false;
+      setStatus('⚠️ '+T('Письмо не ушло ('+esc(err&&(err.text||err.message)||'ошибка сети')+'). Нажми «Отправить снова» или скопируй результат и пришли преподавателю.',
+                  'The e-mail was not sent. Press “Resend”, or copy your result and send it to the teacher.',
+                  '寄送失敗，請按「重新寄出」，或複製成績自行寄給老師。',
+                  '送信できませんでした。「もう一度送る」を押すか、結果をコピーして先生に送ってください。',
+                  'Gửi không thành công. Hãy bấm «Gửi lại», hoặc sao chép kết quả và tự gửi cho thầy.'), 'fail');
+    });
+}
+function copyReport(){
+  const t=window.REPORT||'';
+  const done=()=>alert('Скопировано · Copied · '+P('已複製','コピーしました','Đã sao chép'));
+  if(navigator.clipboard) navigator.clipboard.writeText(t).then(done).catch(()=>prompt('Ctrl+C',t));
+  else prompt('Ctrl+C',t);
+}
+
+
+/* ---------- init ---------- */
+initLang();
+initForm();
+refreshDeadlineUI();
+syncClock().then(refreshDeadlineUI);
+const _openHW = openHW; openHW = function(){ _openHW(); refreshDeadlineUI(); };
+
+</script>
+</body>
+</html>
